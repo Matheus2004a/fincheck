@@ -9,6 +9,12 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
+  app.enableCors({
+    origin: '*',
+  });
+
+  app.getHttpAdapter().getInstance().disable('x-powered-by');
+
   await app.listen(3000);
 }
 bootstrap();
