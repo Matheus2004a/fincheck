@@ -1,8 +1,11 @@
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
+import useRegister from './useRegister';
 
 export function Register() {
+  const { handleSubmit, errors, register } = useRegister();
+
   return (
     <>
       <Header
@@ -12,12 +15,13 @@ export function Register() {
         href="/login"
       />
 
-      <form className="mt-[60px] flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="mt-[60px] flex flex-col gap-4">
         <fieldset>
           <Input
             type="text"
             placeholder="Nome"
-            name="name"
+            error={errors.name?.message}
+            {...register('name')}
           />
         </fieldset>
 
@@ -25,7 +29,8 @@ export function Register() {
           <Input
             type="email"
             placeholder="E-mail"
-            name="email"
+            error={errors.email?.message}
+            {...register('email')}
           />
         </fieldset>
 
@@ -33,11 +38,12 @@ export function Register() {
           <Input
             type="password"
             placeholder="Senha"
-            name="password"
+            error={errors.password?.message}
+            {...register('password')}
           />
         </fieldset>
 
-        <Button type="submit">Criar conta</Button>
+        <Button type="submit" className="mt-2">Criar conta</Button>
       </form>
     </>
   );
