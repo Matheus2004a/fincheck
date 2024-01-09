@@ -1,11 +1,12 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from 'react-router-dom';
+import useAuth from '../../app/hooks/useAuth';
 
 export function AuthGuard() {
-  const signedIn = false;
+  const { signedIn } = useAuth();
 
   if (!signedIn) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/login" replace />;
   }
 
-  return <Outlet />
+  return <Outlet />;
 }

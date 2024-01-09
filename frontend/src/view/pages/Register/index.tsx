@@ -4,7 +4,9 @@ import { Input } from '../../components/Input';
 import useRegister from './useRegister';
 
 export function Register() {
-  const { handleSubmit, errors, register } = useRegister();
+  const {
+    handleSubmit, errors, register, isLoading,
+  } = useRegister();
 
   return (
     <>
@@ -43,7 +45,9 @@ export function Register() {
           />
         </fieldset>
 
-        <Button type="submit" className="mt-2">Criar conta</Button>
+        <Button type="submit" className="mt-2" isLoading={isLoading}>
+          Criar conta
+        </Button>
       </form>
     </>
   );

@@ -4,7 +4,9 @@ import { Input } from '../../components/Input';
 import useLogin from './useLogin';
 
 export function Login() {
-  const { register, handleSubmit, errors } = useLogin();
+  const {
+    register, handleSubmit, errors, isLoading,
+  } = useLogin();
 
   return (
     <>
@@ -34,7 +36,9 @@ export function Login() {
           />
         </fieldset>
 
-        <Button type="submit" className="mt-2">Entrar</Button>
+        <Button type="submit" className="mt-2" isLoading={isLoading}>
+          Entrar
+        </Button>
       </form>
     </>
   );
