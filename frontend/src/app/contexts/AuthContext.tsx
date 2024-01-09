@@ -3,6 +3,7 @@ import {
   createContext, useCallback, useEffect, useState,
 } from 'react';
 import toast from 'react-hot-toast';
+import { LaunchScreen } from '../../view/components/LaunchScreen';
 import { storage } from '../config/storage';
 import UsersService from '../services/UsersService';
 
@@ -15,29 +16,33 @@ interface AuthContextProps {
 export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+  const [signedIn, setIsSignedIn] = useState<boolean>(() => {
     const storedAccessToken = localStorage.getItem(storage.ACCESS_TOKEN);
 
     return !!storedAccessToken;
   });
 
+  const {
+    isError, isFetching, isSuccess, remove,
+  } = useQuery({
+    queryKey: ['users', 'me'],
+    queryFn: async () => UsersService.me(),
+    enabled: signedIn,
+    staleTime: Infinity,
+  });
+
   const signin = useCallback((accessToken: string) => {
     localStorage.setItem(storage.ACCESS_TOKEN, accessToken);
 
-    setIsAuthenticated(true);
+    setIsSignedIn(true);
   }, []);
 
   const signout = useCallback(() => {
     localStorage.removeItem(storage.ACCESS_TOKEN);
 
-    setIsAuthenticated(false);
-  }, []);
-
-  const { isError } = useQuery({
-    queryKey: ['users', 'me'],
-    queryFn: async () => UsersService.me(),
-    enabled: isAuthenticated,
-  });
+    setIsSignedIn(false);
+    remove();
+  }, [remove]);
 
   useEffect(() => {
     if (isError) {
@@ -46,9 +51,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [isError, signout]);
 
+  if (isFetching) {
+    return <LaunchScreen isLoading />;
+  }
+
   return (
     <AuthContext.Provider value={{
-      signedIn: isAuthenticated,
+      signedIn: isSuccess && signedIn,
       signin,
       signout,
     }}

@@ -1,13 +1,13 @@
 import { httpClient } from './httpClient';
 
-interface UserInfosProps {
+interface MeResponse {
   name: string;
   email: string;
 }
 
 class UsersService {
   async me() {
-    const { data } = await httpClient.get<UserInfosProps>('/users/me');
+    const { data } = await httpClient.get<MeResponse>('/users/me');
 
     return data;
   }
