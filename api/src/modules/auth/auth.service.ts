@@ -28,7 +28,7 @@ export class AuthService {
       throw new UnauthorizedException('Credenciais inválidas');
     }
 
-    const isPasswordCorrect = compare(password, user.password);
+    const isPasswordCorrect = await compare(password, user.password);
 
     if (!isPasswordCorrect) {
       throw new UnauthorizedException('Senha inválida');
