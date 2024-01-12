@@ -5,11 +5,15 @@ import { EyeIcon } from '../../../../components/icons/EyeIcon';
 import { AccountCard } from './AccountCard';
 
 import 'swiper/css';
+import { cn } from '../../../../../app/utils/cn';
 import { AccountSliderNavigation } from './AccountSliderNavigation';
 import { useAccounts } from './useAccounts';
 
 export function Accounts() {
-  const { sliderState, setSliderState, windowWidth } = useAccounts();
+  const {
+    sliderState, setSliderState, windowWidth,
+    isVisibleValues, toggleValuesVisibility,
+  } = useAccounts();
 
   return (
     <article className="w-full md:w-1/2 bg-teal-900 rounded-2xl h-full md:p-10 px-4 py-8 flex flex-col md:gap-0 gap-10">
@@ -17,10 +21,20 @@ export function Accounts() {
         <p className="tracking-[-0.5px]">Saldo total</p>
 
         <div className="flex items-center gap-2">
-          <strong className="text-2xl tracking-[-1px]">{formatCurrency(100)}</strong>
+          <strong
+            className={cn(
+              'text-2xl tracking-[-1px]',
+              !isVisibleValues && 'blur',
+            )}
+          >
+            {isVisibleValues ? formatCurrency(100) : '------'}
+          </strong>
 
-          <Button className="w-8 h-8 flex items-center">
-            <EyeIcon open />
+          <Button
+            className="w-8 h-8 flex items-center"
+            onClick={toggleValuesVisibility}
+          >
+            <EyeIcon open={isVisibleValues} />
           </Button>
         </div>
       </section>
