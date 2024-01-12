@@ -1,15 +1,18 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { formatCurrency } from '../../../../app/utils/formatCurrency';
-import { Button } from '../../../components/Button';
-import { EyeIcon } from '../../../components/icons/EyeIcon';
+import { formatCurrency } from '../../../../../app/utils/formatCurrency';
+import { Button } from '../../../../components/Button';
+import { EyeIcon } from '../../../../components/icons/EyeIcon';
 import { AccountCard } from './AccountCard';
 
 import 'swiper/css';
 import { AccountSliderNavigation } from './AccountSliderNavigation';
+import { useAccounts } from './useAccounts';
 
 export function Accounts() {
+  const { sliderState, setSliderState, windowWidth } = useAccounts();
+
   return (
-    <article className="w-full md:w-1/2 bg-teal-900 rounded-2xl h-full md:p-10 px-4 py-8 flex flex-col">
+    <article className="w-full md:w-1/2 bg-teal-900 rounded-2xl h-full md:p-10 px-4 py-8 flex flex-col md:gap-0 gap-10">
       <section className="text-white">
         <p className="tracking-[-0.5px]">Saldo total</p>
 
@@ -26,15 +29,24 @@ export function Accounts() {
         <div>
           <Swiper
             spaceBetween={16}
-            slidesPerView={2.1}
+            slidesPerView={windowWidth >= 500 ? 2.1 : 1.2}
             className="w-full"
+            onSlideChange={(swiper) => {
+              setSliderState({
+                isBeginning: swiper.isBeginning,
+                isEnd: swiper.isEnd,
+              });
+            }}
           >
             <header className="flex justify-between items-center mb-4" slot="container-start">
               <strong className="text-white tracking-[-1px] text-lg">
                 Minhas contas
               </strong>
 
-              <AccountSliderNavigation />
+              <AccountSliderNavigation
+                isBeginning={sliderState.isBeginning}
+                isEnd={sliderState.isEnd}
+              />
             </header>
 
             <SwiperSlide>
