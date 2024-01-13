@@ -17,5 +17,7 @@ export function useAccounts() {
     windowWidth: width,
     isVisibleValues,
     toggleValuesVisibility,
+    isLoading: false,
+    accounts: [],
   };
 }
