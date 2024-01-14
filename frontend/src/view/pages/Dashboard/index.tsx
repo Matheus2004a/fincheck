@@ -1,6 +1,7 @@
 import { Logo } from '../../components/Logo';
 import { UserMenu } from '../../components/UserMenu';
 import { Accounts } from './components/Accounts';
+import { Fab } from './components/Fab';
 import { Transactions } from './components/Transactions';
 import { DashboardProvider } from './contexts/DashboardContext';
 
@@ -17,6 +18,8 @@ export function Dashboard() {
           <Accounts />
           <Transactions />
         </main>
+
+        <Fab />
       </div>
     </DashboardProvider>
   );

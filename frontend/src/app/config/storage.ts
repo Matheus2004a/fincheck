@@ -1,4 +1,4 @@
 export const storage = {
   ACCESS_TOKEN: '@fincheck:accessToken',
-  VALUE_IS_VISIBLE: 'valuesIsVisible',
+  VALUE_IS_VISIBLE: '@fincheck:valuesIsVisible',
 };
