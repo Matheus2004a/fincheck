@@ -4,13 +4,17 @@ import emptyStateImage from '../../../../../assets/empty-state.svg';
 import { Spinner } from '../../../../components/Spinner';
 import { FilterIcon } from '../../../../components/icons/FilterIcon';
 import { CardTransaction } from './CardTransaction';
+import { FiltersModal } from './FiltersModal';
 import { SliderNavigation } from './SliderNavigation';
 import { SliderOption } from './SliderOption';
 import { TransactionTypeDropdown } from './TransactionTypeDropdown';
 import useTransactions from './useTransactions';
 
 export function Transactions() {
-  const { isLoading, transactions } = useTransactions();
+  const {
+    isLoading, transactions, isFiltersModalOpen,
+    handleOpenFiltersModal, handleCloseFiltersModal,
+  } = useTransactions();
 
   return (
     <article className="w-full md:w-1/2 bg-gray-100 rounded-2xl h-full p-10 flex flex-col">
@@ -18,7 +22,7 @@ export function Transactions() {
         <div className="flex justify-between mb-6">
           <TransactionTypeDropdown />
 
-          <button type="button">
+          <button type="button" onClick={handleOpenFiltersModal}>
             <FilterIcon />
           </button>
         </div>
@@ -52,23 +56,30 @@ export function Transactions() {
       )}
 
       {!isLoading && (
-        <section className="flex flex-col flex-1 gap-2 mt-4 overflow-y-auto">
+        <>
+          <FiltersModal
+            open={isFiltersModalOpen}
+            onClose={handleCloseFiltersModal}
+          />
+
+          <section className="flex flex-col flex-1 gap-2 mt-4 overflow-y-auto">
             {transactions.length === 0 && (
-              <figure className="flex flex-col justify-center items-center h-full">
-                <img src={emptyStateImage} alt="empty-transactions" />
-                <figcaption className="text-gray-700 text-center">
-                  Não encontramos nenhuma transação!
-                </figcaption>
-              </figure>
+            <figure className="flex flex-col justify-center items-center h-full">
+              <img src={emptyStateImage} alt="empty-transactions" />
+              <figcaption className="text-gray-700 text-center">
+                Não encontramos nenhuma transação!
+              </figcaption>
+            </figure>
             )}
 
             {transactions.length > 0 && (
-              <>
-                <CardTransaction />
-                <CardTransaction />
-              </>
+            <>
+              <CardTransaction />
+              <CardTransaction />
+            </>
             )}
-        </section>
+          </section>
+        </>
       )}
     </article>
   );

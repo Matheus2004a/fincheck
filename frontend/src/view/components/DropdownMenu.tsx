@@ -18,7 +18,7 @@ function DropdownMenuRoot({ children }: { children: React.ReactNode }) {
 
 function DropdownMenuTrigger({ children }: { children: React.ReactNode }) {
   return (
-    <RdxDropdownMenu.Trigger>
+    <RdxDropdownMenu.Trigger asChild>
       {children}
     </RdxDropdownMenu.Trigger>
   );
