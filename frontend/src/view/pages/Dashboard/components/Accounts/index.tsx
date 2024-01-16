@@ -15,7 +15,7 @@ export function Accounts() {
   const {
     sliderState, setSliderState, windowWidth,
     isVisibleValues, toggleValuesVisibility,
-    isLoading, accounts,
+    isLoading, accounts, openNewAccountModal,
   } = useAccounts();
 
   return (
@@ -61,6 +61,7 @@ export function Accounts() {
 
                 <button
                   type="button"
+                  onClick={openNewAccountModal}
                   className="flex flex-col justify-center items-center h-52 text-white gap-4 mt-4 border-2 border-dashed border-teal-600 rounded-2xl"
                 >
                   <PlusIcon className="w-11 h-11 p-2.5 border-2 border-dashed rounded-full" />

@@ -9,7 +9,7 @@ export function useAccounts() {
   });
 
   const width = useWindowWidth();
-  const { isVisibleValues, toggleValuesVisibility } = useDashboard();
+  const { isVisibleValues, toggleValuesVisibility, openNewAccountModal } = useDashboard();
 
   return {
     sliderState,
@@ -19,5 +19,6 @@ export function useAccounts() {
     toggleValuesVisibility,
     isLoading: false,
     accounts: [],
+    openNewAccountModal,
   };
 }
