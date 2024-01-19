@@ -18,7 +18,7 @@ export function useAccounts() {
     isVisibleValues,
     toggleValuesVisibility,
     isLoading: false,
-    accounts: [],
+    accounts: ['Nubank', 'Inter', 'XP Investimentos'],
     openNewAccountModal,
   };
 }
