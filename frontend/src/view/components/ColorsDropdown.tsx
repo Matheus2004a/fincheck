@@ -1,12 +1,15 @@
-import { ChevronDownIcon, CrossCircledIcon } from '@radix-ui/react-icons';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import { cn } from '../../app/utils/cn';
 import { DropdownMenu } from './DropdownMenu';
+import { Errors } from './Errors';
 import { ColorIcon } from './icons/ColorIcon';
 
 interface ColorsDropdownInputProps {
   error?: string;
   className?: string;
+  value?: string;
+  onChange(): void;
 }
 
 type Color = {
@@ -31,11 +34,18 @@ const colors: Color[] = [
   { color: '#212529', bg: '#F8F9FA' },
 ];
 
-export function ColorsDropdownInput({ error, className }: ColorsDropdownInputProps) {
-  const [selectedColor, setSelectedColor] = useState<null | Color>(null);
+export function ColorsDropdownInput({
+  error, className, value, onChange,
+}: ColorsDropdownInputProps) {
+  const [selectedColor, setSelectedColor] = useState<null | Color>(() => {
+    if (!value) return null;
+
+    return colors.find((c) => c.color) ?? null;
+  });
 
   function handleSelect(color: Color) {
     setSelectedColor(color);
+    onChange(color.color);
   }
 
   return (
@@ -77,12 +87,7 @@ export function ColorsDropdownInput({ error, className }: ColorsDropdownInputPro
         </DropdownMenu.Content>
       </DropdownMenu.Root>
 
-      {error && (
-        <div className="flex gap-2 items-center mt-2 text-red-900">
-          <CrossCircledIcon />
-          <span className="text-xs">{error}</span>
-        </div>
-      )}
+      <Errors error={error} />
     </div>
   );
 }

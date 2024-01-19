@@ -1,7 +1,8 @@
-import { ChevronDownIcon, ChevronUpIcon, CrossCircledIcon } from '@radix-ui/react-icons';
+import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import * as RdxSelect from '@radix-ui/react-select';
 import { useState } from 'react';
 import { cn } from '../../app/utils/cn';
+import { Errors } from './Errors';
 
 interface SelectProps {
   className?: string;
@@ -11,15 +12,18 @@ interface SelectProps {
     value: string;
     label: string;
   }[];
+  value?: string;
+  onChange(value: string): void;
 }
 
 export function Select({
-  className, error, placeholder, options,
+  className, error, placeholder, options, value, onChange,
 }: SelectProps) {
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState(value);
 
-  function handleSelect(value: string) {
-    setSelectedValue(value);
+  function handleSelect(newValue: string) {
+    setSelectedValue(newValue);
+    onChange(newValue);
   }
 
   return (
@@ -34,7 +38,7 @@ export function Select({
         {placeholder}
       </label>
 
-      <RdxSelect.Root onValueChange={handleSelect}>
+      <RdxSelect.Root value={value} onValueChange={handleSelect}>
         <RdxSelect.Trigger
           className={cn(
             'w-full rounded-lg pt-4 border-gray-500 border px-3 h-[52px] text-gray-800 focus:border-gray-800 transition-all outline-none',
@@ -81,12 +85,7 @@ export function Select({
         </RdxSelect.Portal>
       </RdxSelect.Root>
 
-      {error && (
-        <div className="flex gap-2 items-center mt-2 text-red-900">
-          <CrossCircledIcon />
-          <span className="text-xs">{error}</span>
-        </div>
-      )}
+      <Errors error={error} />
     </div>
   );
 }
