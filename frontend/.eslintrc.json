@@ -36,6 +36,7 @@
     "jsx-a11y/control-has-associated-label": "off",
     "react/jsx-no-bind": "off",
     "no-param-reassign": "off",
+    "class-methods-use-this": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

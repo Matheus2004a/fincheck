@@ -1,4 +1,5 @@
 import { Controller } from 'react-hook-form';
+import { options } from '../../../../../app/config/optionsAccounts';
 import { Button } from '../../../../components/Button';
 import { ColorsDropdownInput } from '../../../../components/ColorsDropdown';
 import { Input } from '../../../../components/Input';
@@ -6,21 +7,6 @@ import { InputCurrency } from '../../../../components/InputCurrency';
 import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
 import useNewAccountModal from './useNewAccountModal';
-
-const options = [
-  {
-    value: 'INVESTMENT',
-    label: 'Investimentos',
-  },
-  {
-    value: 'CASH',
-    label: 'Dinheiro Físico',
-  },
-  {
-    value: 'CHECKING',
-    label: 'Conta Corrente',
-  },
-];
 
 export function NewAccountModal() {
   const {

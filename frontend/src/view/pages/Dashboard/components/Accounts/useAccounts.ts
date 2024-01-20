@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useMemo, useState } from 'react';
 import { useWindowWidth } from '../../../../../app/hooks/useWindowWidth';
+import BankAccountService from '../../../../../app/services/BankAccountService';
 import useDashboard from '../../contexts/useDashboard';
 
 export function useAccounts() {
@@ -9,7 +11,21 @@ export function useAccounts() {
   });
 
   const width = useWindowWidth();
-  const { isVisibleValues, toggleValuesVisibility, openNewAccountModal } = useDashboard();
+  const {
+    isVisibleValues, toggleValuesVisibility, openNewAccountModal,
+    openEditAccountModal,
+  } = useDashboard();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['bankAccounts'],
+    queryFn: BankAccountService.getAll,
+  });
+
+  const currentBalance = useMemo(() => {
+    if (!data) return 0;
+
+    return data.reduce((total, account) => total + account.currentBalance, 0);
+  }, [data]);
 
   return {
     sliderState,
@@ -17,8 +33,10 @@ export function useAccounts() {
     windowWidth: width,
     isVisibleValues,
     toggleValuesVisibility,
-    isLoading: false,
-    accounts: ['Nubank', 'Inter', 'XP Investimentos'],
+    isLoading,
+    accounts: data ?? [],
     openNewAccountModal,
+    currentBalance,
+    openEditAccountModal,
   };
 }
