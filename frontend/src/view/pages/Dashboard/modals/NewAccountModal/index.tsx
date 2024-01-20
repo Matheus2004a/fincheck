@@ -1,3 +1,5 @@
+import { Controller } from 'react-hook-form';
+import { Button } from '../../../../components/Button';
 import { ColorsDropdownInput } from '../../../../components/ColorsDropdown';
 import { Input } from '../../../../components/Input';
 import { InputCurrency } from '../../../../components/InputCurrency';
@@ -21,7 +23,10 @@ const options = [
 ];
 
 export function NewAccountModal() {
-  const { isNewAccountModalOpen, closeNewAccountModal } = useNewAccountModal();
+  const {
+    isNewAccountModalOpen, closeNewAccountModal,
+    errors, handleSubmit, register, control, isLoading,
+  } = useNewAccountModal();
 
   return (
     <Modal
@@ -29,28 +34,65 @@ export function NewAccountModal() {
       open={isNewAccountModalOpen}
       onClose={closeNewAccountModal}
     >
-      <form>
+      <form onSubmit={handleSubmit}>
         <span className="text-gray-600 text-lg">Saldo</span>
 
         <div className="flex items-center gap-2">
           <span className="text-gray-600 text-lg">R$</span>
-          <InputCurrency />
+
+          <Controller
+            control={control}
+            name="initialBalance"
+            defaultValue="0"
+            render={({ field: { onChange, value } }) => (
+              <InputCurrency
+                error={errors.initialBalance?.message}
+                value={value}
+                onChange={onChange}
+              />
+            )}
+          />
         </div>
 
         <div className="flex flex-col gap-4 mt-10">
           <Input
             type="text"
-            name="initialBalance"
             placeholder="Nome da Conta"
+            error={errors.name?.message}
+            {...register('name')}
           />
 
-          <Select
-            placeholder="Selecione uma conta"
-            options={options}
+          <Controller
+            control={control}
+            name="type"
+            defaultValue="CHECKING"
+            render={({ field: { onChange, value } }) => (
+              <Select
+                placeholder="Selecione uma conta"
+                options={options}
+                error={errors.type?.message}
+                onChange={onChange}
+                value={value}
+              />
+            )}
           />
 
-          <ColorsDropdownInput />
+          <Controller
+            control={control}
+            name="color"
+            defaultValue=""
+            render={({ field: { onChange } }) => (
+              <ColorsDropdownInput
+                error={errors.color?.message}
+                onChange={onChange}
+              />
+            )}
+          />
         </div>
+
+        <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
+          Criar
+        </Button>
       </form>
     </Modal>
   );
