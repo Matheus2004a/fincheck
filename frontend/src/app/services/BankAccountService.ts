@@ -22,6 +22,12 @@ class BankAccountService {
 
     return data;
   }
+
+  async update(body: BankAccountParams) {
+    const { data } = await httpClient.put('/bank-accounts', body);
+
+    return data;
+  }
 }
 
 export default new BankAccountService();

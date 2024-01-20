@@ -10,8 +10,8 @@ import useDashboard from '../../contexts/useDashboard';
 
 type FormData = z.infer<typeof schema>;
 
-export default function useNewAccountModal() {
-  const { isNewAccountModalOpen, closeNewAccountModal } = useDashboard();
+export default function useEditAccountModal() {
+  const { isEditAccountModalOpen, closeEditAccountModal } = useDashboard();
 
   const {
     register,
@@ -28,12 +28,12 @@ export default function useNewAccountModal() {
   const { isLoading, mutateAsync } = useMutation(BankAccountService.create, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
-      toast.success('Conta criada com sucesso');
-      closeNewAccountModal();
+      toast.success('Conta editada com sucesso');
+      closeEditAccountModal();
       reset();
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Erro ao cadastrar conta');
+      toast.error(error.message || 'Erro ao editar conta');
     },
   });
 
@@ -45,8 +45,8 @@ export default function useNewAccountModal() {
   });
 
   return {
-    isNewAccountModalOpen,
-    closeNewAccountModal,
+    isEditAccountModalOpen,
+    closeEditAccountModal,
     register,
     errors,
     handleSubmit,
