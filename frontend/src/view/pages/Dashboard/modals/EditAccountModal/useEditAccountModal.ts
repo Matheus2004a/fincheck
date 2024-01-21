@@ -11,26 +11,30 @@ import useDashboard from '../../contexts/useDashboard';
 type FormData = z.infer<typeof schema>;
 
 export default function useEditAccountModal() {
-  const { isEditAccountModalOpen, closeEditAccountModal } = useDashboard();
+  const { isEditAccountModalOpen, closeEditAccountModal, accountBeingEdited } = useDashboard();
 
   const {
     register,
     handleSubmit: hookFormSubmit,
     formState: { errors },
     control,
-    reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      color: accountBeingEdited?.color,
+      initialBalance: accountBeingEdited?.initialBalance,
+      name: accountBeingEdited?.name,
+      type: accountBeingEdited?.type,
+    },
   });
 
   const queryClient = useQueryClient();
 
-  const { isLoading, mutateAsync } = useMutation(BankAccountService.create, {
+  const { isLoading, mutateAsync } = useMutation(BankAccountService.update, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
       toast.success('Conta editada com sucesso');
       closeEditAccountModal();
-      reset();
     },
     onError: (error: Error) => {
       toast.error(error.message || 'Erro ao editar conta');
@@ -41,6 +45,7 @@ export default function useEditAccountModal() {
     await mutateAsync({
       ...data,
       initialBalance: currencyStringToNumber(data.initialBalance),
+      id: accountBeingEdited?.id,
     });
   });
 

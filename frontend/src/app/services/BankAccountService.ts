@@ -2,6 +2,7 @@ import { BankAccount } from '../entities/BankAccount';
 import { httpClient } from './httpClient';
 
 interface BankAccountParams {
+  id?: string,
   name: string,
   initialBalance: number,
   color: string,
@@ -23,8 +24,8 @@ class BankAccountService {
     return data;
   }
 
-  async update(body: BankAccountParams) {
-    const { data } = await httpClient.put('/bank-accounts', body);
+  async update({ id, ...params }: BankAccountParams) {
+    const { data } = await httpClient.put(`/bank-accounts/${id}`, params);
 
     return data;
   }

@@ -66,7 +66,6 @@ export function EditAccountModal() {
           <Controller
             control={control}
             name="color"
-            defaultValue=""
             render={({ field: { onChange } }) => (
               <ColorsDropdownInput
                 error={errors.color?.message}
@@ -77,7 +76,7 @@ export function EditAccountModal() {
         </div>
 
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Criar
+          Salvar
         </Button>
       </form>
     </Modal>

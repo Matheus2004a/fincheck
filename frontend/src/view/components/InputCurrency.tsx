@@ -3,7 +3,7 @@ import { Errors } from './Errors';
 
 interface InputCurrencyProps {
   error?: string;
-  value?: string;
+  value?: string | number;
   onChange(value: string): void;
 }
 
