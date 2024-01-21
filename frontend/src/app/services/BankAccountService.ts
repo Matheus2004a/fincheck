@@ -29,6 +29,12 @@ class BankAccountService {
 
     return data;
   }
+
+  async remove(bankAccountId: string) {
+    const { data } = await httpClient.delete(`/bank-accounts/${bankAccountId}`);
+
+    return data;
+  }
 }
 
 export default new BankAccountService();
