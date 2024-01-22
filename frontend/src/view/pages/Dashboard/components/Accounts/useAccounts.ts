@@ -1,4 +1,3 @@
-/* eslint-disable arrow-body-style */
 import { useMemo, useState } from 'react';
 import useBankAccounts from '../../../../../app/hooks/useBankAccounts';
 import { useWindowWidth } from '../../../../../app/hooks/useWindowWidth';

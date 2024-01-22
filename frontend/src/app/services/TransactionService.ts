@@ -1,12 +1,12 @@
 import { httpClient } from './httpClient';
 
 interface TransactionParams {
-  bankAccountId: string,
-  categoryId: string,
-  name: string,
-  value: number,
-  type: 'INCOME' | 'EXPENSE',
-  date: Date
+  bankAccountId: string;
+  categoryId: string;
+  name: string;
+  value: number;
+  type: 'INCOME' | 'EXPENSE';
+  date: string;
 }
 
 class TransactionService {

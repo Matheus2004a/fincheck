@@ -37,6 +37,8 @@
     "react/jsx-no-bind": "off",
     "no-param-reassign": "off",
     "class-methods-use-this": "off",
+    "arrow-body-style": "off",
+    "eslint-disable arrow-body-style": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

@@ -11,6 +11,7 @@ export function NewTransactionModal() {
   const {
     isNewTransactionModalOpen, closeNewTransactionModal, newTransactionType,
     control, errors, handleSubmit, register, accounts, categories,
+    isLoading,
   } = useNewTransactionModal();
 
   const isIncome = newTransactionType === 'INCOME';
@@ -50,7 +51,7 @@ export function NewTransactionModal() {
 
           <Controller
             control={control}
-            name="category"
+            name="categoryId"
             defaultValue=""
             render={({ field: { onChange, value } }) => (
               <Select
@@ -60,7 +61,7 @@ export function NewTransactionModal() {
                   label: category.name,
                   icon: category.icon,
                 }))}
-                error={errors.category?.message}
+                error={errors.categoryId?.message}
                 onChange={onChange}
                 value={value}
               />
@@ -88,13 +89,18 @@ export function NewTransactionModal() {
           <Controller
             control={control}
             name="date"
+            defaultValue={new Date()}
             render={({ field: { onChange, value } }) => (
-              <DatePickerInput value={value} onChange={onChange} />
+              <DatePickerInput
+                error={errors.date?.message}
+                value={value}
+                onChange={onChange}
+              />
             )}
           />
         </div>
 
-        <Button type="submit" className="w-full mt-6">
+        <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
           Salvar
         </Button>
       </form>
