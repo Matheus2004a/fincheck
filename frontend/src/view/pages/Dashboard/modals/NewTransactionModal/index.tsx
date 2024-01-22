@@ -1,4 +1,5 @@
-import { options } from '../../../../../app/config/optionsAccounts';
+import { Controller } from 'react-hook-form';
+import { Button } from '../../../../components/Button';
 import { DatePickerInput } from '../../../../components/DatePickerInput';
 import { Input } from '../../../../components/Input';
 import { InputCurrency } from '../../../../components/InputCurrency';
@@ -9,6 +10,7 @@ import useNewTransactionModal from './useNewTransactionModal';
 export function NewTransactionModal() {
   const {
     isNewTransactionModalOpen, closeNewTransactionModal, newTransactionType,
+    control, errors, handleSubmit, register, accounts, categories,
   } = useNewTransactionModal();
 
   const isIncome = newTransactionType === 'INCOME';
@@ -19,33 +21,82 @@ export function NewTransactionModal() {
       open={isNewTransactionModalOpen}
       onClose={closeNewTransactionModal}
     >
-      <form>
+      <form onSubmit={handleSubmit}>
         <span className="text-gray-600 text-lg">Valor</span>
 
         <div className="flex items-center gap-2">
           <span className="text-gray-600 text-lg">R$</span>
-          <InputCurrency />
+          <Controller
+            control={control}
+            name="value"
+            defaultValue="0"
+            render={({ field: { onChange, value } }) => (
+              <InputCurrency
+                error={errors.value?.message}
+                value={value}
+                onChange={onChange}
+              />
+            )}
+          />
         </div>
 
         <div className="flex flex-col gap-4 mt-10">
           <Input
             type="text"
-            name="initialBalance"
             placeholder={isIncome ? 'Nome da Receita' : 'Nome da Despesa'}
+            error={errors.name?.message}
+            {...register('name')}
           />
 
-          <Select
-            placeholder="Categoria"
-            options={options}
+          <Controller
+            control={control}
+            name="category"
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <Select
+                placeholder="Categoria"
+                options={categories.map((category) => ({
+                  value: category.id,
+                  label: category.name,
+                  icon: category.icon,
+                }))}
+                error={errors.category?.message}
+                onChange={onChange}
+                value={value}
+              />
+            )}
           />
 
-          <Select
-            placeholder={isIncome ? 'Receber na conta' : 'Pagar na conta'}
-            options={options}
+          <Controller
+            control={control}
+            name="bankAccountId"
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <Select
+                placeholder={isIncome ? 'Receber na conta' : 'Pagar na conta'}
+                options={accounts.map((account) => ({
+                  value: account.id,
+                  label: account.name,
+                }))}
+                error={errors.bankAccountId?.message}
+                onChange={onChange}
+                value={value}
+              />
+            )}
           />
 
-          <DatePickerInput />
+          <Controller
+            control={control}
+            name="date"
+            render={({ field: { onChange, value } }) => (
+              <DatePickerInput value={value} onChange={onChange} />
+            )}
+          />
         </div>
+
+        <Button type="submit" className="w-full mt-6">
+          Salvar
+        </Button>
       </form>
     </Modal>
   );
