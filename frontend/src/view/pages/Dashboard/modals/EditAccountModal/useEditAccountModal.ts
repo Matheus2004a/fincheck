@@ -3,13 +3,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { z } from 'zod';
 import BankAccountService from '../../../../../app/services/BankAccountService';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
-import { schema } from '../../../../../app/validations/schemaAccounts';
+import { FormData, schemaAccounts } from '../../../../../app/validations/schemaAccounts';
 import useDashboard from '../../contexts/useDashboard';
-
-type FormData = z.infer<typeof schema>;
 
 export default function useEditAccountModal() {
   const { isEditAccountModalOpen, closeEditAccountModal, accountBeingEdited } = useDashboard();
@@ -22,7 +19,7 @@ export default function useEditAccountModal() {
     formState: { errors },
     control,
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schemaAccounts),
     defaultValues: {
       color: accountBeingEdited?.color,
       initialBalance: accountBeingEdited?.initialBalance,

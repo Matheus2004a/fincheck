@@ -2,13 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { z } from 'zod';
 import BankAccountService from '../../../../../app/services/BankAccountService';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
-import { schema } from '../../../../../app/validations/schemaAccounts';
+import { FormData, schemaAccounts } from '../../../../../app/validations/schemaAccounts';
 import useDashboard from '../../contexts/useDashboard';
-
-type FormData = z.infer<typeof schema>;
 
 export default function useNewAccountModal() {
   const { isNewAccountModalOpen, closeNewAccountModal } = useDashboard();
@@ -20,7 +17,7 @@ export default function useNewAccountModal() {
     control,
     reset,
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schemaAccounts),
   });
 
   const queryClient = useQueryClient();

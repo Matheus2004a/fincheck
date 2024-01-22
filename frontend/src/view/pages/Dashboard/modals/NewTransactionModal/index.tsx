@@ -1,24 +1,10 @@
+import { options } from '../../../../../app/config/optionsAccounts';
 import { DatePickerInput } from '../../../../components/DatePickerInput';
 import { Input } from '../../../../components/Input';
 import { InputCurrency } from '../../../../components/InputCurrency';
 import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
 import useNewTransactionModal from './useNewTransactionModal';
-
-const options = [
-  {
-    value: 'INVESTMENT',
-    label: 'Investimentos',
-  },
-  {
-    value: 'CASH',
-    label: 'Dinheiro Físico',
-  },
-  {
-    value: 'CHECKING',
-    label: 'Conta Corrente',
-  },
-];
 
 export function NewTransactionModal() {
   const {
