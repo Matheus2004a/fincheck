@@ -64,20 +64,21 @@ export function Transactions() {
 
           <section className="flex flex-col flex-1 gap-2 mt-4 overflow-y-auto">
             {transactions.length === 0 && (
-            <figure className="flex flex-col justify-center items-center h-full">
-              <img src={emptyStateImage} alt="empty-transactions" />
-              <figcaption className="text-gray-700 text-center">
-                Não encontramos nenhuma transação!
-              </figcaption>
-            </figure>
+              <figure className="flex flex-col justify-center items-center h-full">
+                <img src={emptyStateImage} alt="empty-transactions" />
+                <figcaption className="text-gray-700 text-center">
+                  Não encontramos nenhuma transação!
+                </figcaption>
+              </figure>
             )}
 
-            {transactions.length > 0 && (
-            <>
-              <CardTransaction />
-              <CardTransaction />
-            </>
-            )}
+            {transactions.map((transaction) => (
+              <CardTransaction
+                key={transaction.id}
+                data={transaction}
+                category={transaction.category}
+              />
+            ))}
           </section>
         </>
       )}
