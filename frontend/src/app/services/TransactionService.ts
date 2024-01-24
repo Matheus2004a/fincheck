@@ -12,7 +12,7 @@ interface TransactionParams {
 
 type TransactionResponse = Transaction[];
 
-type TransactionFilters = {
+export type TransactionFilters = {
   month: number;
   year: number;
   bankAccountId?: string;

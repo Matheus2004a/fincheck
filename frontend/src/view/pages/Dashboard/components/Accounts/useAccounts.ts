@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import useBankAccounts from '../../../../../app/hooks/useBankAccounts';
-import { useWindowWidth } from '../../../../../app/hooks/useWindowWidth';
+import useWindowWidth from '../../../../../app/hooks/useWindowWidth';
 import useDashboard from '../../contexts/useDashboard';
 
-export function useAccounts() {
+export default function useAccounts() {
   const [sliderState, setSliderState] = useState({
     isBeginning: true,
     isEnd: false,

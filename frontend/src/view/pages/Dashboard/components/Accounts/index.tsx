@@ -9,7 +9,7 @@ import 'swiper/css';
 import { cn } from '../../../../../app/utils/cn';
 import { Spinner } from '../../../../components/Spinner';
 import { AccountSliderNavigation } from './AccountSliderNavigation';
-import { useAccounts } from './useAccounts';
+import useAccounts from './useAccounts';
 
 export function Accounts() {
   const {

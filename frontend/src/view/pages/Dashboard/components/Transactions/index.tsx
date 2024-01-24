@@ -14,13 +14,17 @@ export function Transactions() {
   const {
     isLoading, transactions, isFiltersModalOpen,
     handleOpenFiltersModal, handleCloseFiltersModal,
+    handleChangeFilters, filters, handleApplyFilters,
   } = useTransactions();
 
   return (
     <article className="w-full md:w-1/2 bg-gray-100 rounded-2xl h-full p-10 flex flex-col">
       <header>
         <div className="flex justify-between mb-6">
-          <TransactionTypeDropdown />
+          <TransactionTypeDropdown
+            onSelect={(type) => handleChangeFilters('type')(type)}
+            selectedType={filters.type}
+          />
 
           <button type="button" onClick={handleOpenFiltersModal}>
             <FilterIcon />
@@ -32,6 +36,10 @@ export function Transactions() {
           spaceBetween={16}
           centeredSlides
           className="relative flex items-center"
+          initialSlide={filters.month}
+          onSlideChange={(swiper) => {
+            handleChangeFilters('month')(swiper.activeIndex);
+          }}
         >
           <SliderNavigation />
 
@@ -60,6 +68,7 @@ export function Transactions() {
           <FiltersModal
             open={isFiltersModalOpen}
             onClose={handleCloseFiltersModal}
+            onApplyFilters={handleApplyFilters}
           />
 
           <section className="flex flex-col flex-1 gap-2 mt-4 overflow-y-auto">
