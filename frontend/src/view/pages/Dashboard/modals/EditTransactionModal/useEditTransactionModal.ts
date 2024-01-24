@@ -52,6 +52,25 @@ export default function useEditTransactionModal(transaction: Transaction, onClos
     },
     onError: () => {
       toast.error(transaction.type === 'INCOME'
+        ? 'Erro ao atualizar receita'
+        : 'Erro ao atualizar despesa');
+    },
+  });
+
+  const {
+    isLoading: isLoadingDelete, mutateAsync: removeTransaction,
+  } = useMutation(TransactionService.remove, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      toast.success(
+        transaction.type === 'INCOME'
+          ? 'Receita removida com sucesso'
+          : 'Despesa removida com sucesso',
+      );
+      onClose();
+    },
+    onError: () => {
+      toast.error(transaction.type === 'INCOME'
         ? 'Erro ao deletar receita'
         : 'Erro ao deletar despesa');
     },
@@ -75,8 +94,8 @@ export default function useEditTransactionModal(transaction: Transaction, onClos
     setIsDeleteModalOpen(false);
   }
 
-  function handleDeleteTransaction() {
-
+  async function handleDeleteTransaction() {
+    await removeTransaction(transaction.id);
   }
 
   return {
@@ -88,7 +107,7 @@ export default function useEditTransactionModal(transaction: Transaction, onClos
     categories,
     isLoading,
     isDeleteModalOpen,
-    isLoadingDelete: false,
+    isLoadingDelete,
     handleOpenDeleteModal,
     handleCloseDeleteModal,
     handleDeleteTransaction,

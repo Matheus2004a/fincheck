@@ -33,6 +33,12 @@ class TransactionService {
     return data;
   }
 
+  async remove(transactionId: string) {
+    const { data } = await httpClient.delete(`/transactions/${transactionId}`);
+
+    return data;
+  }
+
   async getAll(filters: TransactionFilters) {
     const { data } = await httpClient.get<TransactionResponse>('/transactions', {
       params: filters,
