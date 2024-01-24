@@ -2,6 +2,7 @@ import { Transaction } from '../entities/Transaction';
 import { httpClient } from './httpClient';
 
 interface TransactionParams {
+  id: string;
   bankAccountId: string;
   categoryId: string;
   name: string;
@@ -22,6 +23,12 @@ export type TransactionFilters = {
 class TransactionService {
   async create(body: TransactionParams) {
     const { data } = await httpClient.post('/transactions', body);
+
+    return data;
+  }
+
+  async update({ id, ...params }: TransactionParams) {
+    const { data } = await httpClient.put(`/transactions/${id}`, params);
 
     return data;
   }

@@ -3,6 +3,7 @@ import { MONTHS } from '../../../../../app/config/constants';
 import emptyStateImage from '../../../../../assets/empty-state.svg';
 import { Spinner } from '../../../../components/Spinner';
 import { FilterIcon } from '../../../../components/icons/FilterIcon';
+import { EditTransactionModal } from '../../modals/EditTransactionModal';
 import { CardTransaction } from './CardTransaction';
 import { FiltersModal } from './FiltersModal';
 import { SliderNavigation } from './SliderNavigation';
@@ -15,6 +16,7 @@ export function Transactions() {
     isLoading, transactions, isFiltersModalOpen,
     handleOpenFiltersModal, handleCloseFiltersModal,
     handleChangeFilters, filters, handleApplyFilters,
+    handleOpenEditModal, handleCloseEditModal, isEditModalOpen, transactionEdited,
   } = useTransactions();
 
   return (
@@ -81,13 +83,25 @@ export function Transactions() {
               </figure>
             )}
 
-            {transactions.map((transaction) => (
-              <CardTransaction
-                key={transaction.id}
-                data={transaction}
-                category={transaction.category}
-              />
-            ))}
+            {transactions.length > 0 && (
+              <>
+                {transactionEdited && (
+                  <EditTransactionModal
+                    open={isEditModalOpen}
+                    onClose={handleCloseEditModal}
+                    transaction={transactionEdited}
+                  />
+                )}
+
+                {transactions.map((transaction) => (
+                  <CardTransaction
+                    key={transaction.id}
+                    data={transaction}
+                    onClick={handleOpenEditModal}
+                  />
+                ))}
+              </>
+            )}
           </section>
         </>
       )}

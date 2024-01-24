@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { Transaction } from '../../../../../app/entities/Transaction';
 import { cn } from '../../../../../app/utils/cn';
 import { formatCurrency } from '../../../../../app/utils/formatCurrency';
 import { formatDate } from '../../../../../app/utils/formatDate';
@@ -5,27 +8,23 @@ import { CategoryIcon } from '../../../../components/icons/categories/CategoryIc
 import useTransactions from './useTransactions';
 
 interface CardTransactionProps {
-  data: {
-    name: string;
-    value: number;
-    type: 'INCOME' | 'EXPENSE';
-    date: string;
-  },
-  category?: {
-    id: string;
-    icon: string;
-  }
+  data: Transaction,
+  onClick(data: Transaction): void;
 }
 
-export function CardTransaction({ data, category }: CardTransactionProps) {
+export function CardTransaction({ data, onClick }: CardTransactionProps) {
   const { isVisibleValues } = useTransactions();
 
   return (
-    <div className="flex justify-between items-center bg-white p-4 rounded-2xl">
+    <div
+      className="flex justify-between items-center bg-white p-4 rounded-2xl"
+      role="button"
+      onClick={() => onClick(data)}
+    >
       <div className="flex-1 flex gap-3">
         <CategoryIcon
           type={data.type === 'INCOME' ? 'income' : 'expense'}
-          category={category?.icon}
+          category={data.category?.icon}
         />
 
         <div>

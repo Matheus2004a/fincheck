@@ -1,26 +1,51 @@
 import { Controller } from 'react-hook-form';
+import { Transaction } from '../../../../../app/entities/Transaction';
 import { Button } from '../../../../components/Button';
+import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal';
 import { DatePickerInput } from '../../../../components/DatePickerInput';
 import { Input } from '../../../../components/Input';
 import { InputCurrency } from '../../../../components/InputCurrency';
 import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
-import useNewTransactionModal from './useNewTransactionModal';
+import { TrashIcon } from '../../../../components/icons/TrashIcon';
+import useEditTransactionModal from './useEditTransactionModal';
 
-export function NewTransactionModal() {
+interface EditTransactionModalProps {
+  transaction: Transaction;
+  open: boolean;
+  onClose(): void;
+}
+
+export function EditTransactionModal({ transaction, open, onClose }: EditTransactionModalProps) {
   const {
-    isNewTransactionModalOpen, closeNewTransactionModal, newTransactionType,
     control, errors, handleSubmit, register, accounts, categories,
-    isLoading,
-  } = useNewTransactionModal();
+    isLoading, isDeleteModalOpen, isLoadingDelete,
+    handleOpenDeleteModal, handleCloseDeleteModal, handleDeleteTransaction,
+  } = useEditTransactionModal(transaction, onClose);
 
-  const isIncome = newTransactionType === 'INCOME';
+  const isIncome = transaction.type === 'INCOME';
+
+  if (isDeleteModalOpen) {
+    return (
+      <ConfirmDeleteModal
+        title={`Tem certeza que deseja excluir esta ${isIncome ? 'receita' : 'despesa'}?`}
+        isLoading={isLoadingDelete}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleDeleteTransaction}
+      />
+    );
+  }
 
   return (
     <Modal
-      title={isIncome ? 'Nova Receita' : 'Nova Despesa'}
-      open={isNewTransactionModalOpen}
-      onClose={closeNewTransactionModal}
+      title={isIncome ? 'Editar Receita' : 'Editar Despesa'}
+      open={open}
+      onClose={onClose}
+      rightAction={(
+        <button type="button" onClick={handleOpenDeleteModal}>
+          <TrashIcon className="w-full h-full p-3 text-red-900" />
+        </button>
+      )}
     >
       <form onSubmit={handleSubmit}>
         <span className="text-gray-600 text-lg">Valor</span>
@@ -30,7 +55,6 @@ export function NewTransactionModal() {
           <Controller
             control={control}
             name="value"
-            defaultValue="0"
             render={({ field: { onChange, value } }) => (
               <InputCurrency
                 error={errors.value?.message}
@@ -52,7 +76,6 @@ export function NewTransactionModal() {
           <Controller
             control={control}
             name="categoryId"
-            defaultValue=""
             render={({ field: { onChange, value } }) => (
               <Select
                 placeholder="Categoria"
@@ -70,7 +93,6 @@ export function NewTransactionModal() {
           <Controller
             control={control}
             name="bankAccountId"
-            defaultValue=""
             render={({ field: { onChange, value } }) => (
               <Select
                 placeholder={isIncome ? 'Receber na conta' : 'Pagar na conta'}
@@ -88,7 +110,6 @@ export function NewTransactionModal() {
           <Controller
             control={control}
             name="date"
-            defaultValue={new Date()}
             render={({ field: { onChange, value } }) => (
               <DatePickerInput
                 error={errors.date?.message}
@@ -100,7 +121,7 @@ export function NewTransactionModal() {
         </div>
 
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Criar
+          Salvar
         </Button>
       </form>
     </Modal>

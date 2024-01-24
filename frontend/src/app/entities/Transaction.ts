@@ -4,6 +4,8 @@ export interface Transaction {
   value: number;
   type: 'INCOME' | 'EXPENSE';
   date: string;
+  categoryId: string;
+  bankAccountId: string;
   category?: {
     id: string;
     icon: string;
