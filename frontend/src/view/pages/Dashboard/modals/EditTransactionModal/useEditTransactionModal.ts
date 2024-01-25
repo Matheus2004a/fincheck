@@ -42,6 +42,8 @@ export default function useEditTransactionModal(transaction: Transaction, onClos
   const { isLoading, mutateAsync: updateTransaction } = useMutation(TransactionService.update, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+
       toast.success(
         transaction.type === 'INCOME'
           ? 'Receita editada com sucesso'
@@ -62,6 +64,8 @@ export default function useEditTransactionModal(transaction: Transaction, onClos
   } = useMutation(TransactionService.remove, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+
       toast.success(
         transaction.type === 'INCOME'
           ? 'Receita removida com sucesso'

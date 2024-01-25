@@ -1,9 +1,7 @@
+import { User } from '../entities/User';
 import { httpClient } from './httpClient';
 
-interface MeResponse {
-  name: string;
-  email: string;
-}
+type MeResponse = User;
 
 class UsersService {
   async me() {

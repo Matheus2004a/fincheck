@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import { useQuery } from '@tanstack/react-query';
 import {
   createContext, useCallback, useEffect, useState,
@@ -5,10 +6,12 @@ import {
 import toast from 'react-hot-toast';
 import { LaunchScreen } from '../../view/components/LaunchScreen';
 import { storage } from '../config/storage';
+import { User } from '../entities/User';
 import UsersService from '../services/UsersService';
 
 interface AuthContextProps {
   signedIn: boolean;
+  user: User | undefined;
   signin(token: string): void;
   signout(): void;
 }
@@ -23,7 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   });
 
   const {
-    isError, isFetching, isSuccess, remove,
+    data, isError, isFetching, isSuccess, remove,
   } = useQuery({
     queryKey: ['users', 'me'],
     queryFn: async () => UsersService.me(),
@@ -58,6 +61,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return (
     <AuthContext.Provider value={{
       signedIn: isSuccess && signedIn,
+      user: data,
       signin,
       signout,
     }}

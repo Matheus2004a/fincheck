@@ -37,6 +37,8 @@ export default function useNewTransactionModal() {
   const { isLoading, mutateAsync: createTransaction } = useMutation(TransactionService.create, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['transactions'] });
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+
       toast.success(
         newTransactionType === 'INCOME'
           ? 'Receita criada com sucesso'
@@ -45,7 +47,7 @@ export default function useNewTransactionModal() {
       closeNewTransactionModal();
     },
     onError: (error: Error) => {
-      toast.error(error.message || 'Erro ao remover transação');
+      toast.error(error.message || 'Erro ao criar transação');
     },
   });
 
