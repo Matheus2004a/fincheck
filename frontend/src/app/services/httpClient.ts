@@ -14,3 +14,8 @@ httpClient.interceptors.request.use((config) => {
 
   return config;
 });
+
+httpClient.interceptors.response.use((response) => response, (error) => {
+  const customError = new Error(error.response.data.message);
+  return Promise.reject(customError);
+});

@@ -2,7 +2,7 @@ import { Transaction } from '../entities/Transaction';
 import { httpClient } from './httpClient';
 
 interface TransactionParams {
-  id: string;
+  id?: string;
   bankAccountId: string;
   categoryId: string;
   name: string;
