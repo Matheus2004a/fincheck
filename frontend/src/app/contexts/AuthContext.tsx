@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 import { useQuery } from '@tanstack/react-query';
 import {
   createContext, useCallback, useEffect, useState,

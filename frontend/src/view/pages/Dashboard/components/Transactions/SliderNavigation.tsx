@@ -7,6 +7,7 @@ export function SliderNavigation() {
   return (
     <>
       <button
+        type="button"
         className="absolute left-0 bg-gray-100 z-10 w-12 h-12 flex justify-center items-center"
         onClick={() => swiper.slidePrev()}
       >
@@ -14,6 +15,7 @@ export function SliderNavigation() {
       </button>
 
       <button
+        type="button"
         className="absolute right-0 bg-gray-100 z-10 w-12 h-12 flex justify-center items-center"
         onClick={() => swiper.slideNext()}
       >

@@ -39,6 +39,7 @@
     "class-methods-use-this": "off",
     "arrow-body-style": "off",
     "eslint-disable arrow-body-style": "off",
+    "react/jsx-no-constructed-context-values": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

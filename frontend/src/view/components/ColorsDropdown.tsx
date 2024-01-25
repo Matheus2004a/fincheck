@@ -9,7 +9,7 @@ interface ColorsDropdownInputProps {
   error?: string;
   className?: string;
   value?: string;
-  onChange(): void;
+  onChange(color: string): void;
 }
 
 type Color = {
