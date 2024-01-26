@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
@@ -8,12 +9,14 @@ export function Login() {
     register, handleSubmit, errors, isLoading,
   } = useLogin();
 
+  const { t } = useTranslation();
+
   return (
     <>
       <Header
-        title="Entre em sua conta"
-        subtitle="Novo por aqui?"
-        text="Crie uma conta"
+        title={t('Entre em sua conta')}
+        subtitle={t('Novo por aqui?')}
+        text={t('Crie uma conta')}
         href="/register"
       />
 
@@ -21,8 +24,8 @@ export function Login() {
         <fieldset>
           <Input
             type="email"
-            placeholder="E-mail"
-            error={errors.email?.message}
+            placeholder={t('E-mail')}
+            error={t(errors.email?.message)}
             {...register('email')}
           />
         </fieldset>
@@ -30,14 +33,14 @@ export function Login() {
         <fieldset>
           <Input
             type="password"
-            placeholder="Senha"
-            error={errors.password?.message}
+            placeholder={t('Senha')}
+            error={t(errors.password?.message)}
             {...register('password')}
           />
         </fieldset>
 
         <Button type="submit" className="mt-2" isLoading={isLoading}>
-          Entrar
+          {t('Entrar')}
         </Button>
       </form>
     </>
