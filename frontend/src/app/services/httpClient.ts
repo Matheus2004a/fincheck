@@ -16,6 +16,13 @@ httpClient.interceptors.request.use((config) => {
 });
 
 httpClient.interceptors.response.use((response) => response, (error) => {
-  const customError = new Error(error.response.data.message);
-  return Promise.reject(customError);
+  if (error.response) {
+    return Promise.reject(new Error(error.response.data.message));
+  }
+
+  if (error.code === 'ERR_NETWORK') {
+    return Promise.reject(new Error(error.message));
+  }
+
+  return error;
 });
