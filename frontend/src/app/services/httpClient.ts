@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import axios from 'axios';
 import { storage } from '../config/storage';
 
@@ -16,13 +17,15 @@ httpClient.interceptors.request.use((config) => {
 });
 
 httpClient.interceptors.response.use((response) => response, (error) => {
-  if (error.response) {
-    return Promise.reject(new Error(error.response.data.message));
-  }
+  try {
+    if (error.response) {
+      throw new Error(error.response.data.message);
+    }
 
-  if (error.code === 'ERR_NETWORK') {
-    return Promise.reject(new Error(error.message));
+    if (error.code === 'ERR_NETWORK') {
+      throw new Error(error.message);
+    }
+  } catch (error: any) {
+    return Promise.reject(error);
   }
-
-  return error;
 });
