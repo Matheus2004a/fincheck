@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { BankAccount } from '../../../../../app/entities/BankAccount';
 import { cn } from '../../../../../app/utils/cn';
 import { formatCurrency } from '../../../../../app/utils/formatCurrency';
@@ -14,6 +15,8 @@ export function AccountCard({ data }: AccountCardProps) {
   } = data;
 
   const { isVisibleValues, openEditAccountModal } = useAccounts();
+
+  const { t } = useTranslation();
 
   return (
     <div
@@ -37,7 +40,7 @@ export function AccountCard({ data }: AccountCardProps) {
         >
           {isVisibleValues ? formatCurrency(currentBalance) : '------'}
         </p>
-        <small className="text-gray-600 text-sm">Saldo atual</small>
+        <small className="text-gray-600 text-sm">{t('currency.current')}</small>
       </div>
     </div>
   );

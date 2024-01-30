@@ -1,4 +1,5 @@
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { options } from '../../../../../app/config/optionsAccounts';
 import { Button } from '../../../../components/Button';
 import { ColorsDropdownInput } from '../../../../components/ColorsDropdown';
@@ -14,14 +15,16 @@ export function NewAccountModal() {
     errors, handleSubmit, register, control, isLoading,
   } = useNewAccountModal();
 
+  const { t } = useTranslation();
+
   return (
     <Modal
-      title="Nova Conta"
+      title={t('newAccountModal.mainText')}
       open={isNewAccountModalOpen}
       onClose={closeNewAccountModal}
     >
       <form onSubmit={handleSubmit}>
-        <span className="text-gray-600 text-lg">Saldo</span>
+        <span className="text-gray-600 text-lg">{t('modals.balanceText')}</span>
 
         <div className="flex items-center gap-2">
           <span className="text-gray-600 text-lg">R$</span>
@@ -32,7 +35,7 @@ export function NewAccountModal() {
             defaultValue="0"
             render={({ field: { onChange, value } }) => (
               <InputCurrency
-                error={errors.initialBalance?.message}
+                error={t(errors.initialBalance?.message)}
                 value={value}
                 onChange={onChange}
               />
@@ -43,8 +46,8 @@ export function NewAccountModal() {
         <div className="flex flex-col gap-4 mt-10">
           <Input
             type="text"
-            placeholder="Nome da Conta"
-            error={errors.name?.message}
+            placeholder={t('modals.nameAccount')}
+            error={t(errors.name?.message)}
             {...register('name')}
           />
 
@@ -54,7 +57,7 @@ export function NewAccountModal() {
             defaultValue="CHECKING"
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder="Selecione uma conta"
+                placeholder={t('modals.select')}
                 options={options}
                 error={errors.type?.message}
                 onChange={onChange}
@@ -69,7 +72,7 @@ export function NewAccountModal() {
             defaultValue=""
             render={({ field: { onChange } }) => (
               <ColorsDropdownInput
-                error={errors.color?.message}
+                error={t(errors.color?.message)}
                 onChange={onChange}
               />
             )}
@@ -77,7 +80,7 @@ export function NewAccountModal() {
         </div>
 
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Criar
+          {t('btnCreate')}
         </Button>
       </form>
     </Modal>

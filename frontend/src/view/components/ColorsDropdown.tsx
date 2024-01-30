@@ -1,5 +1,6 @@
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { cn } from '../../app/utils/cn';
 import { DropdownMenu } from './DropdownMenu';
 import { Errors } from './Errors';
@@ -48,6 +49,8 @@ export function ColorsDropdownInput({
     onChange(color.color);
   }
 
+  const { t } = useTranslation();
+
   return (
     <div>
       <DropdownMenu.Root>
@@ -61,7 +64,7 @@ export function ColorsDropdownInput({
               className,
             )}
           >
-            Cor
+            {t('modals.color')}
 
             <div className="absolute right-3 top-1/2 -translate-y-1/2">
               {!selectedColor && (

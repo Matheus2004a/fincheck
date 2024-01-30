@@ -3,6 +3,7 @@ import {
   createContext, useCallback, useEffect, useState,
 } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { LaunchScreen } from '../../view/components/LaunchScreen';
 import { storage } from '../config/storage';
 import { User } from '../entities/User';
@@ -33,6 +34,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     staleTime: Infinity,
   });
 
+  const { t } = useTranslation();
+
   const signin = useCallback((accessToken: string) => {
     localStorage.setItem(storage.ACCESS_TOKEN, accessToken);
 
@@ -48,10 +51,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (isError) {
-      toast.error('Sua sessão expirou');
+      toast.error(t('toast.session'));
       signout();
     }
-  }, [isError, signout]);
+  }, [isError, signout, t]);
 
   if (isFetching) {
     return <LaunchScreen isLoading />;

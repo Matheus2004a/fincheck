@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from './Button';
 import { Modal } from './Modal';
 import { TrashIcon } from './icons/TrashIcon';
@@ -13,9 +14,11 @@ interface ConfirmDeleteModalProps {
 export function ConfirmDeleteModal({
   title, description, isLoading, onClose, onConfirm,
 }: ConfirmDeleteModalProps) {
+  const { t } = useTranslation();
+
   return (
     <Modal
-      title="Excluir"
+      title={t('confirmDeleteModal.mainText')}
       open
       onClose={onClose}
     >
@@ -40,7 +43,7 @@ export function ConfirmDeleteModal({
           onClick={onConfirm}
           isLoading={isLoading}
         >
-          Sim, desejo excluir
+          {t('confirmDeleteModal.actions.delete')}
         </Button>
 
         <Button
@@ -49,7 +52,7 @@ export function ConfirmDeleteModal({
           onClick={onClose}
           disabled={isLoading}
         >
-          Cancelar
+          {t('confirmDeleteModal.actions.cancel')}
         </Button>
       </div>
     </Modal>

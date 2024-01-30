@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { MONTHS } from '../../../../../app/config/constants';
 import emptyStateImage from '../../../../../assets/empty-state.svg';
@@ -18,6 +19,8 @@ export function Transactions() {
     handleChangeFilters, filters, handleApplyFilters,
     handleOpenEditModal, handleCloseEditModal, isEditModalOpen, transactionEdited,
   } = useTransactions();
+
+  const { t } = useTranslation();
 
   return (
     <article className="w-full md:w-1/2 bg-gray-100 rounded-2xl h-full p-10 flex flex-col">
@@ -78,7 +81,7 @@ export function Transactions() {
               <figure className="flex flex-col justify-center items-center h-full">
                 <img src={emptyStateImage} alt="empty-transactions" />
                 <figcaption className="text-gray-700 text-center">
-                  Não encontramos nenhuma transação!
+                  {t('transactions.notFound')}
                 </figcaption>
               </figure>
             )}

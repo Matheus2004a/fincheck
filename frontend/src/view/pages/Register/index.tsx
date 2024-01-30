@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
@@ -8,12 +9,14 @@ export function Register() {
     handleSubmit, errors, register, isLoading,
   } = useRegister();
 
+  const { t } = useTranslation();
+
   return (
     <>
       <Header
-        title="Crie sua conta"
-        subtitle="Já possui uma conta?"
-        text="Fazer Login"
+        title={t('register.createAccount')}
+        subtitle={t('register.alreadyAccount')}
+        text={t('register.loginText')}
         href="/login"
       />
 
@@ -21,8 +24,8 @@ export function Register() {
         <fieldset>
           <Input
             type="text"
-            placeholder="Nome"
-            error={errors.name?.message}
+            placeholder={t('form.name')}
+            error={t(errors.name?.message)}
             {...register('name')}
           />
         </fieldset>
@@ -30,8 +33,8 @@ export function Register() {
         <fieldset>
           <Input
             type="email"
-            placeholder="E-mail"
-            error={errors.email?.message}
+            placeholder={t('form.email')}
+            error={t(errors.email?.message)}
             {...register('email')}
           />
         </fieldset>
@@ -39,14 +42,14 @@ export function Register() {
         <fieldset>
           <Input
             type="password"
-            placeholder="Senha"
-            error={errors.password?.message}
+            placeholder={t('form.password')}
+            error={t(errors.password?.message)}
             {...register('password')}
           />
         </fieldset>
 
         <Button type="submit" className="mt-2" isLoading={isLoading}>
-          Criar conta
+          {t('register.createText')}
         </Button>
       </form>
     </>

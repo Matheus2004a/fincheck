@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import BankAccountService from '../../../../../app/services/BankAccountService';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
 import { FormData, schemaAccounts } from '../../../../../app/validations/schemaAccounts';
@@ -28,12 +29,14 @@ export default function useEditAccountModal() {
     },
   });
 
+  const { t } = useTranslation();
+
   const queryClient = useQueryClient();
 
   const { isLoading, mutateAsync: updateAccount } = useMutation(BankAccountService.update, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
-      toast.success('Conta editada com sucesso');
+      toast.success(t('toast.accountSuccessEdited'));
       closeEditAccountModal();
     },
     onError: (error: Error) => {
@@ -46,7 +49,7 @@ export default function useEditAccountModal() {
   } = useMutation(BankAccountService.remove, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
-      toast.success('Conta removida com sucesso');
+      toast.success(t('toast.accountSuccessDeleted'));
       closeEditAccountModal();
     },
     onError: (error: Error) => {

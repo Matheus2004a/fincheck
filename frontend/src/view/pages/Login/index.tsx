@@ -14,9 +14,9 @@ export function Login() {
   return (
     <>
       <Header
-        title={t('Entre em sua conta')}
-        subtitle={t('Novo por aqui?')}
-        text={t('Crie uma conta')}
+        title={t('login.signinText')}
+        subtitle={t('login.newHere')}
+        text={t('login.createAccount')}
         href="/register"
       />
 
@@ -24,7 +24,7 @@ export function Login() {
         <fieldset>
           <Input
             type="email"
-            placeholder={t('E-mail')}
+            placeholder={t('form.email')}
             error={t(errors.email?.message)}
             {...register('email')}
           />
@@ -33,14 +33,14 @@ export function Login() {
         <fieldset>
           <Input
             type="password"
-            placeholder={t('Senha')}
+            placeholder={t('form.password')}
             error={t(errors.password?.message)}
             {...register('password')}
           />
         </fieldset>
 
         <Button type="submit" className="mt-2" isLoading={isLoading}>
-          {t('Entrar')}
+          {t('login.signin')}
         </Button>
       </form>
     </>

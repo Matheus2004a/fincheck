@@ -1,4 +1,5 @@
 import { PlusIcon } from '@radix-ui/react-icons';
+import { useTranslation } from 'react-i18next';
 import { DropdownMenu } from '../../../../components/DropdownMenu';
 import { BankAccountIcon } from '../../../../components/icons/BankAccountIcon';
 import { CategoryIcon } from '../../../../components/icons/categories/CategoryIcon';
@@ -6,6 +7,8 @@ import useDashboard from '../../contexts/useDashboard';
 
 export function Fab() {
   const { openNewAccountModal, openNewTransactionModal } = useDashboard();
+
+  const { t } = useTranslation();
 
   return (
     <div className="fixed right-4 bottom-4 z-50">
@@ -22,17 +25,17 @@ export function Fab() {
         <DropdownMenu.Content>
           <DropdownMenu.Item className="gap-2" onSelect={() => openNewTransactionModal('EXPENSE')}>
             <CategoryIcon type="expense" />
-            Nova Despesa
+            {t('fab.expense')}
           </DropdownMenu.Item>
 
           <DropdownMenu.Item className="gap-2" onSelect={() => openNewTransactionModal('INCOME')}>
             <CategoryIcon type="income" />
-            Nova Receita
+            {t('fab.income')}
           </DropdownMenu.Item>
 
           <DropdownMenu.Item className="gap-2" onSelect={openNewAccountModal}>
             <BankAccountIcon />
-            Nova Conta
+            {t('fab.newAccount')}
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>

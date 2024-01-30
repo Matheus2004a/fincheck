@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import { Transaction } from '../../../../../app/entities/Transaction';
 import useBankAccounts from '../../../../../app/hooks/useBankAccounts';
 import useCategories from '../../../../../app/hooks/useCategories';
@@ -13,6 +14,7 @@ import { FormData, schemaTransaction } from '../../../../../app/validations/sche
 export default function useEditTransactionModal(transaction: Transaction, onClose: () => void) {
   const { accounts } = useBankAccounts();
   const { categories: categoriesList } = useCategories();
+  const { t } = useTranslation();
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -46,16 +48,16 @@ export default function useEditTransactionModal(transaction: Transaction, onClos
 
       toast.success(
         transaction.type === 'INCOME'
-          ? 'Receita editada com sucesso'
-          : 'Despesa editada com sucesso',
+          ? t('toast.update.success.income')
+          : t('toast.update.success.expense'),
       );
       reset();
       onClose();
     },
     onError: () => {
       toast.error(transaction.type === 'INCOME'
-        ? 'Erro ao atualizar receita'
-        : 'Erro ao atualizar despesa');
+        ? t('toast.update.error.income')
+        : t('toast.update.error.expense'));
     },
   });
 
@@ -68,15 +70,15 @@ export default function useEditTransactionModal(transaction: Transaction, onClos
 
       toast.success(
         transaction.type === 'INCOME'
-          ? 'Receita removida com sucesso'
-          : 'Despesa removida com sucesso',
+          ? t('toast.remove.success.income')
+          : t('toast.remove.success.expense'),
       );
       onClose();
     },
     onError: () => {
       toast.error(transaction.type === 'INCOME'
-        ? 'Erro ao deletar receita'
-        : 'Erro ao deletar despesa');
+        ? t('toast.remove.error.income')
+        : t('toast.remove.error.expense'));
     },
   });
 

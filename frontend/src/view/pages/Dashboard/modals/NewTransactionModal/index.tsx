@@ -1,4 +1,5 @@
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../../../../components/Button';
 import { DatePickerInput } from '../../../../components/DatePickerInput';
 import { Input } from '../../../../components/Input';
@@ -14,16 +15,18 @@ export function NewTransactionModal() {
     isLoading,
   } = useNewTransactionModal();
 
+  const { t } = useTranslation();
+
   const isIncome = newTransactionType === 'INCOME';
 
   return (
     <Modal
-      title={isIncome ? 'Nova Receita' : 'Nova Despesa'}
+      title={isIncome ? t('newTransactionModal.income') : t('newTransactionModal.expense')}
       open={isNewTransactionModalOpen}
       onClose={closeNewTransactionModal}
     >
       <form onSubmit={handleSubmit}>
-        <span className="text-gray-600 text-lg">Valor</span>
+        <span className="text-gray-600 text-lg">{t('newTransactionModal.value')}</span>
 
         <div className="flex items-center gap-2">
           <span className="text-gray-600 text-lg">R$</span>
@@ -33,7 +36,7 @@ export function NewTransactionModal() {
             defaultValue="0"
             render={({ field: { onChange, value } }) => (
               <InputCurrency
-                error={errors.value?.message}
+                error={t(errors.value?.message)}
                 value={value}
                 onChange={onChange}
               />
@@ -44,8 +47,10 @@ export function NewTransactionModal() {
         <div className="flex flex-col gap-4 mt-10">
           <Input
             type="text"
-            placeholder={isIncome ? 'Nome da Receita' : 'Nome da Despesa'}
-            error={errors.name?.message}
+            placeholder={isIncome
+              ? t('newTransactionModal.nameIncome')
+              : t('newTransactionModal.nameExpense')}
+            error={t(errors.name?.message)}
             {...register('name')}
           />
 
@@ -55,12 +60,12 @@ export function NewTransactionModal() {
             defaultValue=""
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder="Categoria"
+                placeholder={t('newTransactionModal.category')}
                 options={categories.map((category) => ({
                   value: category.id,
                   label: category.name,
                 }))}
-                error={errors.categoryId?.message}
+                error={t(errors.categoryId?.message)}
                 onChange={onChange}
                 value={value}
               />
@@ -73,12 +78,14 @@ export function NewTransactionModal() {
             defaultValue=""
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder={isIncome ? 'Receber na conta' : 'Pagar na conta'}
+                placeholder={isIncome
+                  ? t('modals.receiveAccount')
+                  : t('modals.payAccount')}
                 options={accounts.map((account) => ({
                   value: account.id,
                   label: account.name,
                 }))}
-                error={errors.bankAccountId?.message}
+                error={t(errors.bankAccountId?.message)}
                 onChange={onChange}
                 value={value}
               />
@@ -100,7 +107,7 @@ export function NewTransactionModal() {
         </div>
 
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Criar
+          {t('btnCreate')}
         </Button>
       </form>
     </Modal>

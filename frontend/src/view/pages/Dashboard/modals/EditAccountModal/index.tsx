@@ -1,4 +1,5 @@
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { options } from '../../../../../app/config/optionsAccounts';
 import { Button } from '../../../../components/Button';
 import { ColorsDropdownInput } from '../../../../components/ColorsDropdown';
@@ -18,12 +19,13 @@ export function EditAccountModal() {
     isLoadingDelete, handleDeleteAccount,
   } = useEditAccountModal();
 
+  const { t } = useTranslation();
+
   if (isDeleteModalOpen) {
     return (
       <ConfirmDeleteModal
-        title="Tem certeza que deseja excluir esta despesa?"
-        description="Ao excluir a conta, também serão excluídos todos
-        os registros de receita e despesas relacionados."
+        title={t('confirmDeleteModal.textConfirmation')}
+        description={t('confirmDeleteModal.description')}
         isLoading={isLoadingDelete}
         onClose={handleCloseDeleteModal}
         onConfirm={handleDeleteAccount}
@@ -33,7 +35,7 @@ export function EditAccountModal() {
 
   return (
     <Modal
-      title="Editar Conta"
+      title={t('modals.editText')}
       open={isEditAccountModalOpen}
       onClose={closeEditAccountModal}
       rightAction={(
@@ -43,7 +45,7 @@ export function EditAccountModal() {
       )}
     >
       <form onSubmit={handleSubmit}>
-        <span className="text-gray-600 text-lg">Saldo</span>
+        <span className="text-gray-600 text-lg">{t('modals.balanceText')}</span>
 
         <div className="flex items-center gap-2">
           <span className="text-gray-600 text-lg">R$</span>
@@ -54,7 +56,7 @@ export function EditAccountModal() {
             defaultValue="0"
             render={({ field: { onChange, value } }) => (
               <InputCurrency
-                error={errors.initialBalance?.message}
+                error={t(errors.initialBalance?.message)}
                 value={value}
                 onChange={onChange}
               />
@@ -65,8 +67,8 @@ export function EditAccountModal() {
         <div className="flex flex-col gap-4 mt-10">
           <Input
             type="text"
-            placeholder="Nome da Conta"
-            error={errors.name?.message}
+            placeholder={t('modals.nameAccount')}
+            error={t(errors.name?.message)}
             {...register('name')}
           />
 
@@ -76,9 +78,9 @@ export function EditAccountModal() {
             defaultValue="CHECKING"
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder="Selecione uma conta"
+                placeholder={t('modals.select')}
                 options={options}
-                error={errors.type?.message}
+                error={t(errors.type?.message)}
                 onChange={onChange}
                 value={value}
               />
@@ -90,7 +92,7 @@ export function EditAccountModal() {
             name="color"
             render={({ field: { onChange } }) => (
               <ColorsDropdownInput
-                error={errors.color?.message}
+                error={t(errors.color?.message)}
                 onChange={onChange}
               />
             )}
@@ -98,7 +100,7 @@ export function EditAccountModal() {
         </div>
 
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Salvar
+          {t('editAccountModal.btnSave')}
         </Button>
       </form>
     </Modal>

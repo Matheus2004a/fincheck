@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import BankAccountService from '../../../../../app/services/BankAccountService';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
 import { FormData, schemaAccounts } from '../../../../../app/validations/schemaAccounts';
@@ -20,12 +21,14 @@ export default function useNewAccountModal() {
     resolver: zodResolver(schemaAccounts),
   });
 
+  const { t } = useTranslation();
+
   const queryClient = useQueryClient();
 
   const { isLoading, mutateAsync } = useMutation(BankAccountService.create, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
-      toast.success('Conta criada com sucesso');
+      toast.success(t('toast.accountSuccessCreated'));
       closeNewAccountModal();
       reset();
     },

@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 import useBankAccounts from '../../../../../app/hooks/useBankAccounts';
 import useCategories from '../../../../../app/hooks/useCategories';
 import TransactionService from '../../../../../app/services/TransactionService';
@@ -32,6 +33,8 @@ export default function useNewTransactionModal() {
     resolver: zodResolver(schemaTransaction),
   });
 
+  const { t } = useTranslation();
+
   const queryClient = useQueryClient();
 
   const { isLoading, mutateAsync: createTransaction } = useMutation(TransactionService.create, {
@@ -41,8 +44,8 @@ export default function useNewTransactionModal() {
 
       toast.success(
         newTransactionType === 'INCOME'
-          ? 'Receita criada com sucesso'
-          : 'Despesa criada com sucesso',
+          ? t('toast.create.success.income')
+          : t('toast.create.success.expense'),
       );
       closeNewTransactionModal();
     },

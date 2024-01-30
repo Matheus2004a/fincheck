@@ -1,14 +1,142 @@
 {
   "translation": {
-    "Singin on your account": "Entre em sua conta",
-    "New here?": "Novo por aqui?",
-    "Create an account": "Crie uma conta",
-    "Email": "E-mail",
+    "login": {
+      "signinText": "Entre em sua conta",
+      "newHere": "Novo por aqui?",
+      "createAccount": "Crie uma conta",
+      "signin": "Login"
+    },
+    "form": {
+      "name": "Nome",
+      "email": "E-mail",
+      "password": "Senha"
+    },
+    "register": {
+      "createAccount": "Crie uma conta",
+      "alreadyAccount": "Já possui uma conta?",
+      "loginText": "Fazer login",
+      "createText": "Criar conta"
+    },
+    "currency": {
+      "total": "Saldo total",
+      "current": "Saldo atual"
+    },
+    "accounts": {
+      "me": "Minhas contas",
+      "newRegister": "Cadastre uma nova conta"
+    },
+    "transactions": {
+      "notFound": "Não encontramos nenhuma transação!",
+      "expense": "Despesas",
+      "income": "Receitas",
+      "mainText": "Transações"
+    },
+    "filters": {
+      "transactions": {
+        "mainText": "Filtros",
+        "accountText": "Conta",
+        "applyText": "Aplicar Filtros",
+        "yearText": "Ano"
+      }
+    },
+    "newAccountModal": {
+      "mainText": "Nova Conta"
+    },
+    "modals": {
+      "nameAccount": "Nome da Conta",
+      "select": "Selecione uma conta",
+      "color": "Cor",
+      "balanceText": "Saldo",
+      "editText": "Editar Conta",
+      "income": "Nome da Receita",
+      "expense": "Nome da Despesa",
+      "category": "Categoria",
+      "receiveAccount": "Receber na conta",
+      "payAccount": "Pagar na conta"
+    },
+    "newTransactionModal": {
+      "expense": "Nova Despesa",
+      "income": "Nova Receita",
+      "category": "Categoria",
+      "newAccount": "Nova Conta",
+      "value": "Valor",
+      "nameIncome": "Nome da Receita",
+      "nameExpense": "Nome da Despesa"
+    },
+    "editTransactionModal": {
+      "incomeText": "Editar Receita",
+      "expenseText": "Editar Despesa"
+    },
+    "editAccountModal": {
+      "btnSave": "Salvar"
+    },
+    "confirmDeleteModal": {
+      "mainText": "Excluir",
+      "textConfirmation": "Tem certeza que deseja excluir esta conta?",
+      "description": "Ao excluir a conta, também serão excluídos todos os registros de receita e despesas relacionados.",
+      "actions": {
+        "delete": "Sim, desejo excluir",
+        "cancel": "Cancelar"
+      }
+    },
+    "fab": {
+      "expense": "Nova Despesa",
+      "income": "Nova Receita",
+      "newAccount": "Nova Conta",
+      "value": "Valor",
+      "nameIncome": "Nome da Receita",
+      "nameExpense": "Nome da Despesa"
+    },
+    "signout": {
+      "btnText": "Sair"
+    },
+    "transactionDelete": "Tem certeza que deseja excluir esta {{type}}?",
+    "toast": {
+      "session": "Sua sessão expirou",
+      "create": {
+        "success": {
+          "income": "Receita criada com sucesso",
+          "expense": "Despesa criada com sucesso"
+        },
+        "error": {
+          "income": "Erro ao criar receita",
+          "expense": "Erro ao criar despesa"
+        }
+      },
+      "update": {
+        "success": {
+          "income": "Receita editada com sucesso",
+          "expense": "Despesa editada com sucesso"
+        },
+        "error": {
+          "income": "Erro ao atualizar receita",
+          "expense": "Erro ao atualizar despesa"
+        }
+      },
+      "remove": {
+        "success": {
+          "income": "Receita removida com sucesso",
+          "expense": "Despesa removida com sucesso"
+        },
+        "error": {
+          "income": "Erro ao deletar receita",
+          "expense": "Erro ao deletar despesa"
+        }
+      },
+      "accountSuccessCreated": "Conta criada com sucesso",
+      "accountSuccessEdited": "Conta editada com sucesso",
+      "accountSuccessDeleted": "Conta removida com sucesso"
+    },
+    "textIncome": "receita",
+    "textExpense": "despesa",
+    "value": "Valor",
+    "btnSave": "Salvar",
+    "btnCreate": "Criar",
     "Email is required": "Email é obrigatório",
     "Invalid email": "Email inválido",
-    "Password is required":"Senha é obrigatória",
+    "Password is required": "Senha é obrigatória",
     "Password must be 8 characters": "A senha deve ter 8 digítos",
-    "Password": "Senha",
-    "Login": "Entrar"
+    "Login": "Entrar",
+    "welcomeText": "Gerencie suas finanças pessoais de uma forma simples com o fincheck, e o melhor, totalmente de graça!"
   }
 }

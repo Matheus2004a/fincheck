@@ -1,4 +1,5 @@
 import { PlusIcon } from '@radix-ui/react-icons';
+import { useTranslation } from 'react-i18next';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { formatCurrency } from '../../../../../app/utils/formatCurrency';
 import { Button } from '../../../../components/Button';
@@ -19,6 +20,8 @@ export function Accounts() {
     currentBalance,
   } = useAccounts();
 
+  const { t } = useTranslation();
+
   return (
     <article className="w-full md:w-1/2 bg-teal-900 rounded-2xl h-full md:p-10 px-4 py-8 flex flex-col md:gap-0 gap-10">
       {isLoading && (
@@ -30,7 +33,7 @@ export function Accounts() {
       {!isLoading && (
         <>
           <section className="text-white">
-            <p className="tracking-[-0.5px]">Saldo total</p>
+            <p className="tracking-[-0.5px]">{t('currency.total')}</p>
 
             <div className="flex items-center gap-2">
               <strong
@@ -56,7 +59,7 @@ export function Accounts() {
               <>
                 <header className="mb-4" slot="container-start">
                   <strong className="text-white tracking-[-1px] text-lg">
-                    Minhas contas
+                    {t('accounts.me')}
                   </strong>
                 </header>
 
@@ -67,7 +70,7 @@ export function Accounts() {
                 >
                   <PlusIcon className="w-11 h-11 p-2.5 border-2 border-dashed rounded-full" />
                   <span className="w-32 font-medium tracking-[-0.5px] text-center">
-                    Cadastre uma nova conta
+                    {t('accounts.newRegister')}
                   </span>
                 </button>
               </>
@@ -87,7 +90,7 @@ export function Accounts() {
               >
                 <header className="flex justify-between items-center mb-4" slot="container-start">
                   <strong className="text-white tracking-[-1px] text-lg">
-                    Minhas contas
+                    {t('accounts.me')}
                   </strong>
 
                   <AccountSliderNavigation

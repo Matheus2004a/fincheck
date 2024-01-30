@@ -1,4 +1,5 @@
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Transaction } from '../../../../../app/entities/Transaction';
 import { Button } from '../../../../components/Button';
 import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal';
@@ -23,12 +24,17 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
     handleOpenDeleteModal, handleCloseDeleteModal, handleDeleteTransaction,
   } = useEditTransactionModal(transaction, onClose);
 
+  const { t } = useTranslation();
+
   const isIncome = transaction.type === 'INCOME';
+
+  const type = isIncome ? t('textIncome') : t('textExpense');
+  const deleteConfirmationText = t('transactionDelete', { type });
 
   if (isDeleteModalOpen) {
     return (
       <ConfirmDeleteModal
-        title={`Tem certeza que deseja excluir esta ${isIncome ? 'receita' : 'despesa'}?`}
+        title={deleteConfirmationText}
         isLoading={isLoadingDelete}
         onClose={handleCloseDeleteModal}
         onConfirm={handleDeleteTransaction}
@@ -38,7 +44,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
 
   return (
     <Modal
-      title={isIncome ? 'Editar Receita' : 'Editar Despesa'}
+      title={isIncome ? t('editTransactionModal.incomeText') : t('editTransactionModal.expenseText')}
       open={open}
       onClose={onClose}
       rightAction={(
@@ -48,7 +54,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
       )}
     >
       <form onSubmit={handleSubmit}>
-        <span className="text-gray-600 text-lg">Valor</span>
+        <span className="text-gray-600 text-lg">{t('value')}</span>
 
         <div className="flex items-center gap-2">
           <span className="text-gray-600 text-lg">R$</span>
@@ -57,7 +63,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
             name="value"
             render={({ field: { onChange, value } }) => (
               <InputCurrency
-                error={errors.value?.message}
+                error={t(errors.value?.message)}
                 value={value}
                 onChange={onChange}
               />
@@ -68,8 +74,8 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
         <div className="flex flex-col gap-4 mt-10">
           <Input
             type="text"
-            placeholder={isIncome ? 'Nome da Receita' : 'Nome da Despesa'}
-            error={errors.name?.message}
+            placeholder={isIncome ? t('modals.income') : t('modals.expense')}
+            error={t(errors.name?.message)}
             {...register('name')}
           />
 
@@ -78,12 +84,12 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
             name="categoryId"
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder="Categoria"
+                placeholder={t('modals.category')}
                 options={categories.map((category) => ({
                   value: category.id,
                   label: category.name,
                 }))}
-                error={errors.categoryId?.message}
+                error={t(errors.categoryId?.message)}
                 onChange={onChange}
                 value={value}
               />
@@ -95,12 +101,12 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
             name="bankAccountId"
             render={({ field: { onChange, value } }) => (
               <Select
-                placeholder={isIncome ? 'Receber na conta' : 'Pagar na conta'}
+                placeholder={isIncome ? t('modals.receiveAccount') : t('modals.payAccount')}
                 options={accounts.map((account) => ({
                   value: account.id,
                   label: account.name,
                 }))}
-                error={errors.bankAccountId?.message}
+                error={t(errors.bankAccountId?.message)}
                 onChange={onChange}
                 value={value}
               />
@@ -112,7 +118,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
             name="date"
             render={({ field: { onChange, value } }) => (
               <DatePickerInput
-                error={errors.date?.message}
+                error={t(errors.date?.message)}
                 value={value}
                 onChange={onChange}
               />
@@ -121,7 +127,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
         </div>
 
         <Button type="submit" className="w-full mt-6" isLoading={isLoading}>
-          Salvar
+          {t('btnSave')}
         </Button>
       </form>
     </Modal>

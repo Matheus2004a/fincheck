@@ -1,4 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { useTranslation } from 'react-i18next';
 import { cn } from '../../../../../../app/utils/cn';
 import { Button } from '../../../../../components/Button';
 import { Modal } from '../../../../../components/Modal';
@@ -16,12 +17,14 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
     selectedYear, handleChangeYear, accounts,
   } = useFiltersModal();
 
-  return (
-    <Modal open={open} title="Filtros" onClose={onClose}>
-      <section>
-        <p className="font-bold">Conta</p>
+  const { t } = useTranslation();
 
-        <div className="space-y-2 mt-2">
+  return (
+    <Modal open={open} title={t('filters.transactions.mainText')} onClose={onClose}>
+      <section>
+        <p className="font-bold">{t('filters.transactions.accountText')}</p>
+
+        <div className="space-y-2 mt-2 overflow-auto">
           {accounts.map((account) => (
             <button
               key={account.id}
@@ -39,7 +42,7 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
       </section>
 
       <section className="mt-10 text-gray-800">
-        <p className="font-bold">Ano</p>
+        <p className="font-bold">{t('filters.transactions.yearText')}</p>
 
         <div className="flex justify-between items-center w-1/2">
           <button type="button" className="p-3" onClick={() => handleChangeYear(-1)}>
@@ -60,7 +63,7 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
             year: selectedYear,
           })}
         >
-          Aplicar Filtros
+          {t('filters.transactions.applyText')}
         </Button>
       </section>
     </Modal>

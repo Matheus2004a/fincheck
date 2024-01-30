@@ -1,14 +1,136 @@
 {
   "translation": {
-    "Entre em sua conta": "Singin on your account",
-    "Novo por aqui?": "New here?",
-    "Crie uma conta": "Create an account",
-    "E-mail": "Email",
+    "login": {
+      "signinText": "Signin on your account",
+      "newHere": "New here?",
+      "createAccount": "Create an account",
+      "signin": "Login"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "password": "Password"
+    },
+    "register": {
+      "createAccount": "Create your account",
+      "alreadyAccount": "Already have an account?",
+      "loginText": "Signin",
+      "createText": "Create account"
+    },
+    "currency": {
+      "total": "Total balance",
+      "current": "Current balance"
+    },
+    "accounts": {
+      "me": "My accounts",
+      "newRegister": "Register a new account"
+    },
+    "transactions": {
+      "notFound": "We didn't find any transactions!",
+      "expense": "Expenses",
+      "income": "Incomes",
+      "mainText": "Transactions"
+    },
+    "filters": {
+      "transactions": {
+        "mainText": "Filters",
+        "accountText": "Account",
+        "applyText": "Apply filters",
+        "yearText": "Year"
+      }
+    },
+    "newAccountModal": {
+      "mainText": "New Account"
+    },
+    "modals": {
+      "nameAccount": "Name account",
+      "select": "Select an account",
+      "color": "Color",
+      "balanceText": "Balance",
+      "editText": "Edit Account",
+      "income": "Income name",
+      "expense": "Expense name",
+      "category": "Category",
+      "receiveAccount": "Receive into account",
+      "payAccount": "Pay into account"
+    },
+    "newTransactionModal": {
+      "expense": "New Expense",
+      "income": "New Income",
+      "category": "Category",
+      "newAccount": "New Account",
+      "value": "Value",
+      "nameIncome": "Income name",
+      "nameExpense": "Expense name"
+    },
+    "editTransactionModal": {
+      "incomeText": "Edit Income",
+      "expenseText": "Edit Expense"
+    },
+    "editAccountModal": {
+      "btnSave": "Save"
+    },
+    "confirmDeleteModal": {
+      "mainText": "Delete",
+      "textConfirmation": "Are you sure you want to exclude this account?",
+      "description": "When you delete the account, all related income and expense records will also be deleted.",
+      "actions": {
+        "delete": "Yes, I want to delete",
+        "cancel": "Cancel"
+      }
+    },
+    "fab": {
+      "expense": "New Expense",
+      "income": "New Income",
+      "newAccount": "New Account"
+    },
+    "signout": {
+      "btnText": "Signout"
+    },
+    "transactionDelete": "Are you sure you want to delete this {{type}}",
+    "toast": {
+      "session": "Your session has expired",
+      "update": {
+        "success": {
+          "income": "Income edited sucessfully",
+          "expense": "Expense edited sucessfully"
+        },
+        "error": {
+          "income": "Error to update income",
+          "expense": "Error to update expense"
+        }
+      },
+      "remove": {
+        "success": {
+          "income": "Income removed sucessfully",
+          "expense": "Expense removed sucessfully"
+        },
+        "error": {
+          "income": "Error to remove income",
+          "expense": "Error to remove expense"
+        }
+      },
+      "accountSuccessCreated": "Account created sucessfully",
+      "accountSuccessEdited": "Account edited sucessfully",
+      "accountSuccessDeleted": "Account removed sucessfully"
+    },
+    "textIncome": "income",
+    "textExpense": "expense",
+    "value": "Value",
+    "btnSave": "Save",
+    "Nome da conta é obrigatório": "Account name is required",
+    "Cor da conta é obrigatória": "Account color is required",
+    "Saldo inicial é obrigatório": "Initial balance is required",
+    "btnCreate": "Create",
+    "Nome é obrigatório": "Name is required",
     "Email é obrigatório": "Email is required",
     "Email inválido": "Invalid email",
     "Senha é obrigatória": "Password is required",
     "A senha deve ter 8 digítos": "Password must be 8 characters",
-    "Senha": "Password",
-    "Entrar": "Login"
+    "Informe o nome": "Enter the name",
+    "Informe a categoria": "Enter the category",
+    "Escolha uma conta": "Choose an account",
+    "Informe o valor": "Enter the value",
+    "welcomeText": "Manage your personal finances in a simple way with fincheck, and best of all, it's completely free!"
   }
 }
