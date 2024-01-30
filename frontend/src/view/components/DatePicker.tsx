@@ -28,7 +28,7 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
           'text-gray-700 cursor-pointer w-10 h-10 hover:bg-teal-100 rounded-full',
         day_today: 'bg-gray-100 font-bold text-gray-900',
         day_selected: '!bg-teal-900 text-white font-medium',
-        day_disabled: '!bg-gray-50 cursor-not-allowed text-gray-400',
+        day_disabled: '!bg-gray-50 !cursor-not-allowed !text-gray-200',
       }}
       formatters={{
         formatCaption: (date, options) => (

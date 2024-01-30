@@ -19,6 +19,8 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
 
   const { t } = useTranslation();
 
+  const isDisabledYear = selectedYear === new Date().getFullYear();
+
   return (
     <Modal open={open} title={t('filters.transactions.mainText')} onClose={onClose}>
       <section>
@@ -51,7 +53,15 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
 
           <span className="text-sm">{selectedYear}</span>
 
-          <button type="button" className="p-3" onClick={() => handleChangeYear(1)}>
+          <button
+            type="button"
+            className={cn(
+              'p-3',
+              isDisabledYear && 'disabled:opacity-40 cursor-not-allowed',
+            )}
+            onClick={() => handleChangeYear(1)}
+            disabled={isDisabledYear}
+          >
             <ChevronRightIcon className="w-6 h-6" />
           </button>
         </div>

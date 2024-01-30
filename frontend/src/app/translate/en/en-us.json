@@ -90,6 +90,16 @@
     "transactionDelete": "Are you sure you want to delete this {{type}}",
     "toast": {
       "session": "Your session has expired",
+      "create": {
+        "success": {
+          "income": "Income created sucessfully",
+          "expense": "Expense created sucessfully"
+        },
+        "error": {
+          "income": "Error to create income",
+          "expense": "Error to create expense"
+        }
+      },
       "update": {
         "success": {
           "income": "Income edited sucessfully",
