@@ -5,6 +5,8 @@ export default function useFiltersModal() {
   const [selectedBankAccountId, setSelectedBankAccountId] = useState<string | undefined>(undefined);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
+  const isDisabledYear = selectedYear === new Date().getFullYear();
+
   const { accounts } = useAccounts();
 
   function handleSelectBankAccount(bankAccountId: string) {
@@ -23,5 +25,6 @@ export default function useFiltersModal() {
     selectedYear,
     handleChangeYear,
     accounts,
+    isDisabledYear,
   };
 }

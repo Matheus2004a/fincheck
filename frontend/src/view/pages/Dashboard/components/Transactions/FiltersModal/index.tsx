@@ -14,12 +14,10 @@ interface FiltersModalProps {
 export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProps) {
   const {
     selectedBankAccountId, handleSelectBankAccount,
-    selectedYear, handleChangeYear, accounts,
+    selectedYear, handleChangeYear, accounts, isDisabledYear,
   } = useFiltersModal();
 
   const { t } = useTranslation();
-
-  const isDisabledYear = selectedYear === new Date().getFullYear();
 
   return (
     <Modal open={open} title={t('filters.transactions.mainText')} onClose={onClose}>
