@@ -49,6 +49,7 @@ export default function useEditAccountModal() {
   } = useMutation(BankAccountService.remove, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
+      queryClient.invalidateQueries({ queryKey: ['transactions'] });
       toast.success(t('toast.accountSuccessDeleted'));
       closeEditAccountModal();
     },

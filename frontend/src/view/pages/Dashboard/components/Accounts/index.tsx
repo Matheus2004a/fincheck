@@ -66,7 +66,7 @@ export function Accounts() {
                 <button
                   type="button"
                   onClick={openNewAccountModal}
-                  className="flex flex-col justify-center items-center h-52 text-white gap-4 mt-4 border-2 border-dashed border-teal-600 rounded-2xl"
+                  className="flex flex-col justify-center items-center h-52 text-white gap-4 mt-4 border-2 border-dashed border-teal-600 rounded-2xl hover:bg-teal-950/10 transition-colors"
                 >
                   <PlusIcon className="w-11 h-11 p-2.5 border-2 border-dashed rounded-full" />
                   <span className="w-32 font-medium tracking-[-0.5px] text-center">
