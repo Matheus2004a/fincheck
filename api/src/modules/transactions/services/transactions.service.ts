@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { randomUUID } from 'crypto';
 import { TransactionRepository } from 'src/shared/database/repositories/transactions.repositories';
 import { ValidateBankAccountOwnershipService } from '../../bank-accounts/services/validate-ownership-bank-account.service';
 import { ValidateCategoryOwnershipService } from '../../categories/services/validate-category-ownership.service';
@@ -25,7 +24,6 @@ export class TransactionsService {
 
     return this.transactionsRepo.create({
       data: {
-        id: randomUUID(),
         date,
         name,
         type,

@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcryptjs';
-import { randomUUID } from 'crypto';
 import { UsersRepository } from 'src/shared/database/repositories/users.repositories';
 import { SigninDto } from './dto/signin.dto';
 import { SignupDto } from './dto/signup.dto';
@@ -56,7 +55,6 @@ export class AuthService {
 
     const newUser = await this.usersRepository.create({
       data: {
-        id: randomUUID(),
         email,
         name,
         password: hashedPassword,
@@ -65,64 +63,54 @@ export class AuthService {
             data: [
               // Income
               {
-                id: randomUUID(),
                 name: 'Salário',
                 icon: 'salary',
                 type: 'INCOME',
               },
               {
-                id: randomUUID(),
                 name: 'Freelance',
                 icon: 'freelance',
                 type: 'INCOME',
               },
               {
-                id: randomUUID(),
                 name: 'Outro',
                 icon: 'other',
                 type: 'INCOME',
               },
               // Expense
-              { id: randomUUID(), name: 'Casa', icon: 'home', type: 'EXPENSE' },
+              { name: 'Casa', icon: 'home', type: 'EXPENSE' },
               {
-                id: randomUUID(),
                 name: 'Alimentação',
                 icon: 'food',
                 type: 'EXPENSE',
               },
               {
-                id: randomUUID(),
                 name: 'Educação',
                 icon: 'education',
                 type: 'EXPENSE',
               },
-              { id: randomUUID(), name: 'Lazer', icon: 'fun', type: 'EXPENSE' },
+              { name: 'Lazer', icon: 'fun', type: 'EXPENSE' },
               {
-                id: randomUUID(),
                 name: 'Mercado',
                 icon: 'grocery',
                 type: 'EXPENSE',
               },
               {
-                id: randomUUID(),
                 name: 'Roupas',
                 icon: 'clothes',
                 type: 'EXPENSE',
               },
               {
-                id: randomUUID(),
                 name: 'Transporte',
                 icon: 'transport',
                 type: 'EXPENSE',
               },
               {
-                id: randomUUID(),
                 name: 'Viagem',
                 icon: 'travel',
                 type: 'EXPENSE',
               },
               {
-                id: randomUUID(),
                 name: 'Outro',
                 icon: 'other',
                 type: 'EXPENSE',

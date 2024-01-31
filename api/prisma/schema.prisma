@@ -8,8 +8,8 @@ datasource db {
 }
 
 model User {
-  id       String @id @db.VarChar(45)
-  name     String @db.VarChar(45)
+  id       String @id @default(uuid()) @db.Uuid
+  name     String
   email    String @unique
   password String
 
@@ -29,12 +29,12 @@ enum BankAccountType {
 }
 
 model BankAccount {
-  id             String          @id @db.VarChar(45)
-  name           String          @db.VarChar(45)
+  id             String          @id @default(uuid()) @db.Uuid
+  name           String
   initialBalance Float           @map("initial_balance")
   type           BankAccountType
-  color          String          @db.VarChar(30)
-  userId         String          @map("user_id") @db.VarChar(45)
+  color          String
+  userId         String          @map("user_id")
   transactions   Transaction[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -50,10 +50,10 @@ enum TransactionType {
 }
 
 model Category {
-  id           String          @id @db.VarChar(45)
-  name         String          @db.VarChar(45)
-  icon         String          @db.VarChar(45)
-  userId       String          @map("user_id") @db.VarChar(45)
+  id           String          @id @default(uuid()) @db.Uuid
+  name         String
+  icon         String
+  userId       String          @map("user_id")
   type         TransactionType
   transactions Transaction[]
 
@@ -61,10 +61,10 @@ model Category {
 }
 
 model Transaction {
-  id            String          @id @db.VarChar(45)
-  userId        String          @map("user_id") @db.VarChar(45)
-  bankAccountId String          @map("bank_account_id") @db.VarChar(45)
-  categoryId    String?         @map("category_id") @db.VarChar(45)
+  id            String          @id @default(uuid()) @db.Uuid
+  userId        String          @map("user_id")
+  bankAccountId String          @map("bank_account_id")
+  categoryId    String?         @map("category_id")
   name          String
   value         Float
   date          DateTime
