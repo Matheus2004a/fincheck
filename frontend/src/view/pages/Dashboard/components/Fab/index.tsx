@@ -8,11 +8,11 @@ import useAccounts from '../Accounts/useAccounts';
 
 export function Fab() {
   const { openNewAccountModal, openNewTransactionModal } = useDashboard();
-  const { accounts } = useAccounts();
+  const { accounts, isLoading } = useAccounts();
 
   const { t } = useTranslation();
 
-  const hasAccounts = accounts.length > 0;
+  const accountsIsEmpty = accounts.length === 0 || isLoading;
 
   return (
     <div className="fixed right-4 bottom-4 z-50">
@@ -28,24 +28,24 @@ export function Fab() {
 
         <DropdownMenu.Content>
           <DropdownMenu.Item
-            className="gap-2 data-[disabled]:bg-gray-200 rounded-2xl data-[disabled]:text-gray-500 data-[disabled]:cursor-not-allowed"
+            className="gap-2 data-[highlighted]:bg-gray-100 transition-colors data-[disabled]:bg-gray-200 rounded-2xl data-[disabled]:text-gray-500 data-[disabled]:cursor-not-allowed"
             onSelect={() => openNewTransactionModal('EXPENSE')}
-            isDisabled={!hasAccounts}
+            isDisabled={accountsIsEmpty}
           >
             <CategoryIcon type="expense" />
             {t('fab.expense')}
           </DropdownMenu.Item>
 
           <DropdownMenu.Item
-            className="gap-2 data-[disabled]:bg-gray-200 rounded-2xl data-[disabled]:text-gray-500 data-[disabled]:cursor-not-allowed"
+            className="gap-2 data-[highlighted]:bg-gray-100 transition-colors data-[disabled]:bg-gray-200 rounded-2xl data-[disabled]:text-gray-500 data-[disabled]:cursor-not-allowed"
             onSelect={() => openNewTransactionModal('INCOME')}
-            isDisabled={!hasAccounts}
+            isDisabled={accountsIsEmpty}
           >
             <CategoryIcon type="income" />
             {t('fab.income')}
           </DropdownMenu.Item>
 
-          <DropdownMenu.Item className="gap-2" onSelect={openNewAccountModal}>
+          <DropdownMenu.Item className="gap-2 data-[highlighted]:bg-gray-100 transition-colors rounded-2xl" onSelect={openNewAccountModal}>
             <BankAccountIcon />
             {t('fab.newAccount')}
           </DropdownMenu.Item>
