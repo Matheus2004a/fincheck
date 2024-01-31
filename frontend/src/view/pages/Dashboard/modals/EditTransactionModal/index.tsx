@@ -63,7 +63,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
             name="value"
             render={({ field: { onChange, value } }) => (
               <InputCurrency
-                error={t(errors.value?.message)}
+                error={errors.value?.message}
                 value={value}
                 onChange={onChange}
               />
@@ -75,7 +75,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
           <Input
             type="text"
             placeholder={isIncome ? t('modals.income') : t('modals.expense')}
-            error={t(errors.name?.message)}
+            error={errors.name?.message}
             {...register('name')}
           />
 
@@ -89,7 +89,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
                   value: category.id,
                   label: category.name,
                 }))}
-                error={t(errors.categoryId?.message)}
+                error={errors.categoryId?.message}
                 onChange={onChange}
                 value={value}
               />
@@ -106,7 +106,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
                   value: account.id,
                   label: account.name,
                 }))}
-                error={t(errors.bankAccountId?.message)}
+                error={errors.bankAccountId?.message}
                 onChange={onChange}
                 value={value}
               />
@@ -118,7 +118,7 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
             name="date"
             render={({ field: { onChange, value } }) => (
               <DatePickerInput
-                error={t(errors.date?.message)}
+                error={errors.date?.message}
                 value={value}
                 onChange={onChange}
               />

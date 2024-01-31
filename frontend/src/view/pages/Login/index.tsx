@@ -25,7 +25,7 @@ export function Login() {
           <Input
             type="email"
             placeholder={t('form.email')}
-            error={t(errors.email?.message)}
+            error={errors.email?.message}
             {...register('email')}
           />
         </fieldset>
@@ -34,7 +34,7 @@ export function Login() {
           <Input
             type="password"
             placeholder={t('form.password')}
-            error={t(errors.password?.message)}
+            error={errors.password?.message}
             {...register('password')}
           />
         </fieldset>

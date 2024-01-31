@@ -56,7 +56,7 @@ export function EditAccountModal() {
             defaultValue="0"
             render={({ field: { onChange, value } }) => (
               <InputCurrency
-                error={t(errors.initialBalance?.message)}
+                error={errors.initialBalance?.message}
                 value={value}
                 onChange={onChange}
               />
@@ -68,7 +68,7 @@ export function EditAccountModal() {
           <Input
             type="text"
             placeholder={t('modals.nameAccount')}
-            error={t(errors.name?.message)}
+            error={errors.name?.message}
             {...register('name')}
           />
 
@@ -80,7 +80,7 @@ export function EditAccountModal() {
               <Select
                 placeholder={t('modals.select')}
                 options={options}
-                error={t(errors.type?.message)}
+                error={errors.type?.message}
                 onChange={onChange}
                 value={value}
               />
@@ -92,7 +92,7 @@ export function EditAccountModal() {
             name="color"
             render={({ field: { onChange } }) => (
               <ColorsDropdownInput
-                error={t(errors.color?.message)}
+                error={errors.color?.message}
                 onChange={onChange}
               />
             )}

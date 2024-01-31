@@ -25,7 +25,7 @@ export function Register() {
           <Input
             type="text"
             placeholder={t('form.name')}
-            error={t(errors.name?.message)}
+            error={errors.name?.message}
             {...register('name')}
           />
         </fieldset>
@@ -34,7 +34,7 @@ export function Register() {
           <Input
             type="email"
             placeholder={t('form.email')}
-            error={t(errors.email?.message)}
+            error={errors.email?.message}
             {...register('email')}
           />
         </fieldset>
@@ -43,7 +43,7 @@ export function Register() {
           <Input
             type="password"
             placeholder={t('form.password')}
-            error={t(errors.password?.message)}
+            error={errors.password?.message}
             {...register('password')}
           />
         </fieldset>

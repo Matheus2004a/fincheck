@@ -36,7 +36,7 @@ export function NewTransactionModal() {
             defaultValue="0"
             render={({ field: { onChange, value } }) => (
               <InputCurrency
-                error={t(errors.value?.message)}
+                error={errors.value?.message}
                 value={value}
                 onChange={onChange}
               />
@@ -50,7 +50,7 @@ export function NewTransactionModal() {
             placeholder={isIncome
               ? t('newTransactionModal.nameIncome')
               : t('newTransactionModal.nameExpense')}
-            error={t(errors.name?.message)}
+            error={errors.name?.message}
             {...register('name')}
           />
 
@@ -65,7 +65,7 @@ export function NewTransactionModal() {
                   value: category.id,
                   label: category.name,
                 }))}
-                error={t(errors.categoryId?.message)}
+                error={errors.categoryId?.message}
                 onChange={onChange}
                 value={value}
               />
@@ -85,7 +85,7 @@ export function NewTransactionModal() {
                   value: account.id,
                   label: account.name,
                 }))}
-                error={t(errors.bankAccountId?.message)}
+                error={errors.bankAccountId?.message}
                 onChange={onChange}
                 value={value}
               />

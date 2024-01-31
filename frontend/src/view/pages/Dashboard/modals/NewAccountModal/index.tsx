@@ -35,7 +35,7 @@ export function NewAccountModal() {
             defaultValue="0"
             render={({ field: { onChange, value } }) => (
               <InputCurrency
-                error={t(errors.initialBalance?.message)}
+                error={errors.initialBalance?.message}
                 value={value}
                 onChange={onChange}
               />
@@ -47,7 +47,7 @@ export function NewAccountModal() {
           <Input
             type="text"
             placeholder={t('modals.nameAccount')}
-            error={t(errors.name?.message)}
+            error={errors.name?.message}
             {...register('name')}
           />
 
@@ -72,7 +72,7 @@ export function NewAccountModal() {
             defaultValue=""
             render={({ field: { onChange } }) => (
               <ColorsDropdownInput
-                error={t(errors.color?.message)}
+                error={errors.color?.message}
                 onChange={onChange}
               />
             )}
