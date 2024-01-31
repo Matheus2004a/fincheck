@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -19,12 +19,15 @@ export default function useLogin() {
 
   const navigate = useNavigate();
 
+  const queryClient = useQueryClient();
+
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: async (data: SigninParams) => AuthService.signin(data),
     onError: (error: Error) => {
       toast.error(error.message);
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['bankAccounts'] });
       navigate('/');
     },
   });
