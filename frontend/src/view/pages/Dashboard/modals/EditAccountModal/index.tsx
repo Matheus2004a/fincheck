@@ -90,10 +90,11 @@ export function EditAccountModal() {
           <Controller
             control={control}
             name="color"
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <ColorsDropdownInput
                 error={errors.color?.message}
                 onChange={onChange}
+                value={value}
               />
             )}
           />
