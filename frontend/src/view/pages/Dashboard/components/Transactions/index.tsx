@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { MONTHS } from '../../../../../app/config/constants';
+import { BR_MONTHS, EN_MONTHS } from '../../../../../app/config/constants';
+import useLanguage from '../../../../../app/hooks/useLanguage';
 import emptyStateImage from '../../../../../assets/empty-state.svg';
 import { Spinner } from '../../../../components/Spinner';
 import { FilterIcon } from '../../../../components/icons/FilterIcon';
@@ -19,8 +20,8 @@ export function Transactions() {
     handleChangeFilters, filters, handleApplyFilters,
     handleOpenEditModal, handleCloseEditModal, isEditModalOpen, transactionEdited,
   } = useTransactions();
-
   const { t } = useTranslation();
+  const { currentLanguage } = useLanguage();
 
   return (
     <article className="w-full md:w-1/2 bg-gray-100 rounded-2xl h-full p-10 flex flex-col">
@@ -48,17 +49,28 @@ export function Transactions() {
         >
           <SliderNavigation />
 
-          {MONTHS.map((month, index) => (
-            <SwiperSlide key={month}>
-              {({ isActive }) => (
-                <SliderOption
-                  isActive={isActive}
-                  month={month}
-                  index={index}
-                />
-              )}
-            </SwiperSlide>
-          ))}
+          {currentLanguage === 'pt-BR'
+            ? BR_MONTHS.map((month, index) => (
+              <SwiperSlide key={month}>
+                {({ isActive }) => (
+                  <SliderOption
+                    isActive={isActive}
+                    month={month}
+                    index={index}
+                  />
+                )}
+              </SwiperSlide>
+            )) : EN_MONTHS.map((month, index) => (
+              <SwiperSlide key={month}>
+                {({ isActive }) => (
+                  <SliderOption
+                    isActive={isActive}
+                    month={month}
+                    index={index}
+                  />
+                )}
+              </SwiperSlide>
+            ))}
         </Swiper>
       </header>
 
