@@ -34,7 +34,7 @@ model BankAccount {
   initialBalance Float           @map("initial_balance")
   type           BankAccountType
   color          String
-  userId         String          @map("user_id")
+  userId         String          @map("user_id") @db.Uuid
   transactions   Transaction[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -53,7 +53,7 @@ model Category {
   id           String          @id @default(uuid()) @db.Uuid
   name         String
   icon         String
-  userId       String          @map("user_id")
+  userId       String          @map("user_id") @db.Uuid
   type         TransactionType
   transactions Transaction[]
 
@@ -62,9 +62,9 @@ model Category {
 
 model Transaction {
   id            String          @id @default(uuid()) @db.Uuid
-  userId        String          @map("user_id")
-  bankAccountId String          @map("bank_account_id")
-  categoryId    String?         @map("category_id")
+  userId        String          @map("user_id") @db.Uuid
+  bankAccountId String          @map("bank_account_id") @db.Uuid
+  categoryId    String?         @map("category_id") @db.Uuid
   name          String
   value         Float
   date          DateTime
