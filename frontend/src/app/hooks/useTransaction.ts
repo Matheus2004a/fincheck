@@ -3,7 +3,7 @@ import TransactionService, { TransactionFilters } from '../services/TransactionS
 
 export default function useTransaction(filters: TransactionFilters) {
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ['transactions'],
+    queryKey: ['transactions', filters],
     queryFn: () => TransactionService.getAll(filters),
   });
 

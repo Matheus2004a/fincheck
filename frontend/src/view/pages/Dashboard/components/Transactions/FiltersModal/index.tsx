@@ -24,7 +24,7 @@ export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProp
       <section>
         <p className="font-bold">{t('filters.transactions.accountText')}</p>
 
-        <div className="space-y-2 mt-2 overflow-auto">
+        <div className="space-y-2 mt-2 max-h-[127px] overflow-y-auto">
           {accounts.map((account) => (
             <button
               key={account.id}
