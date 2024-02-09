@@ -91,5 +91,6 @@ export default function useEditAccountModal() {
     handleCloseDeleteModal,
     isLoadingDelete,
     handleDeleteAccount,
+    t,
   };
 }

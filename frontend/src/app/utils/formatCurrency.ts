@@ -1,6 +1,6 @@
-export function formatCurrency(value: number) {
-  return value.toLocaleString('pt-br', {
+export function formatCurrency(value: number, currentLanguage: string) {
+  return value.toLocaleString(currentLanguage, {
     style: 'currency',
-    currency: 'BRL',
+    currency: currentLanguage === 'pt-BR' ? 'BRL' : 'USD',
   });
 }

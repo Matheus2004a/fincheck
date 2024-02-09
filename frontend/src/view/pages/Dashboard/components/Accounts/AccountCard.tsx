@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { BankAccount } from '../../../../../app/entities/BankAccount';
 import { cn } from '../../../../../app/utils/cn';
 import { formatCurrency } from '../../../../../app/utils/formatCurrency';
@@ -14,9 +13,9 @@ export function AccountCard({ data }: AccountCardProps) {
     color, name, currentBalance, type,
   } = data;
 
-  const { isVisibleValues, openEditAccountModal } = useAccounts();
-
-  const { t } = useTranslation();
+  const {
+    isVisibleValues, openEditAccountModal, currentLanguage, t,
+  } = useAccounts();
 
   return (
     <div
@@ -38,7 +37,7 @@ export function AccountCard({ data }: AccountCardProps) {
           !isVisibleValues && 'blur-sm',
         )}
         >
-          {isVisibleValues ? formatCurrency(currentBalance) : '------'}
+          {isVisibleValues ? formatCurrency(currentBalance, currentLanguage) : '------'}
         </p>
         <small className="text-gray-600 text-sm">{t('currency.current')}</small>
       </div>

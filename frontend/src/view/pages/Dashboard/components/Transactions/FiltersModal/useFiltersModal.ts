@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useAccounts from '../../Accounts/useAccounts';
 
 export default function useFiltersModal() {
@@ -8,6 +9,7 @@ export default function useFiltersModal() {
   const isDisabledYear = selectedYear === new Date().getFullYear();
 
   const { accounts } = useAccounts();
+  const { t } = useTranslation();
 
   function handleSelectBankAccount(bankAccountId: string) {
     setSelectedBankAccountId((prevState) => (
@@ -26,5 +28,6 @@ export default function useFiltersModal() {
     handleChangeYear,
     accounts,
     isDisabledYear,
+    t,
   };
 }

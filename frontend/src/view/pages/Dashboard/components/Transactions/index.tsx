@@ -1,7 +1,5 @@
-import { useTranslation } from 'react-i18next';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { BR_MONTHS, EN_MONTHS } from '../../../../../app/config/constants';
-import useLanguage from '../../../../../app/hooks/useLanguage';
 import emptyStateImage from '../../../../../assets/empty-state.svg';
 import { Spinner } from '../../../../components/Spinner';
 import { FilterIcon } from '../../../../components/icons/FilterIcon';
@@ -19,9 +17,8 @@ export function Transactions() {
     handleOpenFiltersModal, handleCloseFiltersModal,
     handleChangeFilters, filters, handleApplyFilters,
     handleOpenEditModal, handleCloseEditModal, isEditModalOpen, transactionEdited,
+    currentLanguage, t,
   } = useTransactions();
-  const { t } = useTranslation();
-  const { currentLanguage } = useLanguage();
 
   return (
     <article className="w-full md:w-1/2 bg-gray-100 rounded-2xl h-full p-10 flex flex-col">

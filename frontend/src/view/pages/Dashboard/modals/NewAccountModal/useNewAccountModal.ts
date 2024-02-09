@@ -52,5 +52,6 @@ export default function useNewAccountModal() {
     handleSubmit,
     control,
     isLoading,
+    t,
   };
 }

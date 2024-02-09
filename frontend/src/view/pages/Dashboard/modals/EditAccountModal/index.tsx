@@ -1,5 +1,4 @@
 import { Controller } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { options } from '../../../../../app/config/optionsAccounts';
 import { Button } from '../../../../components/Button';
 import { ColorsDropdownInput } from '../../../../components/ColorsDropdown';
@@ -16,10 +15,8 @@ export function EditAccountModal() {
     isEditAccountModalOpen, closeEditAccountModal,
     errors, handleSubmit, register, control, isLoading,
     isDeleteModalOpen, handleOpenDeleteModal, handleCloseDeleteModal,
-    isLoadingDelete, handleDeleteAccount,
+    isLoadingDelete, handleDeleteAccount, t,
   } = useEditAccountModal();
-
-  const { t } = useTranslation();
 
   if (isDeleteModalOpen) {
     return (

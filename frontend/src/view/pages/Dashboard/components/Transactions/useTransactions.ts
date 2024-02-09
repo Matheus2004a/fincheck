@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Transaction } from '../../../../../app/entities/Transaction';
 import useTransaction from '../../../../../app/hooks/useTransaction';
 import { TransactionFilters } from '../../../../../app/services/TransactionService';
 import useDashboard from '../../contexts/useDashboard';
+import useLanguage from '../../../../../app/hooks/useLanguage';
 
 export default function useTransactions() {
   const { isVisibleValues } = useDashboard();
@@ -19,6 +21,9 @@ export default function useTransactions() {
   });
 
   const { transactions, isLoading, refetchTransactions } = useTransaction(filters);
+
+  const { currentLanguage } = useLanguage();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -81,5 +86,7 @@ export default function useTransactions() {
     transactionEdited,
     handleOpenEditModal,
     handleCloseEditModal,
+    currentLanguage,
+    t,
   };
 }

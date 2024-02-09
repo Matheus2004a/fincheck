@@ -1,5 +1,4 @@
 import { Controller } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { options } from '../../../../../app/config/optionsAccounts';
 import { Button } from '../../../../components/Button';
 import { ColorsDropdownInput } from '../../../../components/ColorsDropdown';
@@ -12,10 +11,8 @@ import useNewAccountModal from './useNewAccountModal';
 export function NewAccountModal() {
   const {
     isNewAccountModalOpen, closeNewAccountModal,
-    errors, handleSubmit, register, control, isLoading,
+    errors, handleSubmit, register, control, isLoading, t,
   } = useNewAccountModal();
-
-  const { t } = useTranslation();
 
   return (
     <Modal

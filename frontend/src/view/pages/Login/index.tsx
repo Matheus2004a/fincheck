@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { Input } from '../../components/Input';
@@ -6,10 +5,8 @@ import useLogin from './useLogin';
 
 export function Login() {
   const {
-    register, handleSubmit, errors, isLoading,
+    register, handleSubmit, errors, isLoading, t,
   } = useLogin();
-
-  const { t } = useTranslation();
 
   return (
     <>

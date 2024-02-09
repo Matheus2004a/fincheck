@@ -117,5 +117,6 @@ export default function useEditTransactionModal(transaction: Transaction, onClos
     handleOpenDeleteModal,
     handleCloseDeleteModal,
     handleDeleteTransaction,
+    t,
   };
 }

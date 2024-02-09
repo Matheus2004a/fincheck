@@ -1,3 +1,3 @@
-export function formatDate(date: Date) {
-  return new Date(date).toLocaleDateString('pt-br');
+export function formatDate(date: Date, currentLanguage: string) {
+  return new Date(date).toLocaleDateString(currentLanguage);
 }

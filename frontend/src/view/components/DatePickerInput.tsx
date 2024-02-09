@@ -4,6 +4,7 @@ import { formatDate } from '../../app/utils/formatDate';
 import { DatePicker } from './DatePicker';
 import { Errors } from './Errors';
 import { Popover } from './Popover';
+import useLanguage from '../../app/hooks/useLanguage';
 
 interface DatePickerInputProps {
   error?: string;
@@ -22,6 +23,8 @@ export function DatePickerInput({
     onChange(date);
   }
 
+  const { currentLanguage } = useLanguage();
+
   return (
     <div>
       <Popover.Root>
@@ -39,7 +42,7 @@ export function DatePickerInput({
               Data
             </span>
             <span>
-              {formatDate(selectedDate)}
+              {formatDate(selectedDate, currentLanguage)}
             </span>
           </button>
         </Popover.Trigger>

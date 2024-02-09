@@ -75,5 +75,6 @@ export default function useNewTransactionModal() {
     accounts,
     categories,
     isLoading,
+    t,
   };
 }

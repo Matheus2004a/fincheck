@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import useAuth from '../../../app/hooks/useAuth';
 import AuthService, { SignupParams } from '../../../app/services/AuthService';
 import { FormData, schemaRegister } from '../../../app/validations/schemaRegister';
@@ -16,6 +17,7 @@ export default function useRegister() {
   });
 
   const { signin } = useAuth();
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -36,6 +38,6 @@ export default function useRegister() {
   });
 
   return {
-    register, handleSubmit, errors, isLoading,
+    register, handleSubmit, errors, isLoading, t,
   };
 }

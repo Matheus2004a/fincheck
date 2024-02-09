@@ -1,5 +1,4 @@
 import { Controller } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { Button } from '../../../../components/Button';
 import { DatePickerInput } from '../../../../components/DatePickerInput';
 import { Input } from '../../../../components/Input';
@@ -12,10 +11,8 @@ export function NewTransactionModal() {
   const {
     isNewTransactionModalOpen, closeNewTransactionModal, newTransactionType,
     control, errors, handleSubmit, register, accounts, categories,
-    isLoading,
+    isLoading, t,
   } = useNewTransactionModal();
-
-  const { t } = useTranslation();
 
   const isIncome = newTransactionType === 'INCOME';
 

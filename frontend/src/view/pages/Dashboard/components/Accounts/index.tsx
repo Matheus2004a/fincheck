@@ -1,5 +1,4 @@
 import { PlusIcon } from '@radix-ui/react-icons';
-import { useTranslation } from 'react-i18next';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { formatCurrency } from '../../../../../app/utils/formatCurrency';
 import { Button } from '../../../../components/Button';
@@ -17,10 +16,8 @@ export function Accounts() {
     sliderState, setSliderState, windowWidth,
     isVisibleValues, toggleValuesVisibility,
     isLoading, accounts, openNewAccountModal,
-    currentBalance,
+    currentBalance, currentLanguage, t,
   } = useAccounts();
-
-  const { t } = useTranslation();
 
   return (
     <article className="w-full md:w-1/2 bg-teal-900 rounded-2xl h-full md:p-10 px-4 py-8 flex flex-col md:gap-0 gap-10">
@@ -42,7 +39,7 @@ export function Accounts() {
                   !isVisibleValues && 'blur',
                 )}
               >
-                {isVisibleValues ? formatCurrency(currentBalance) : '------'}
+                {isVisibleValues ? formatCurrency(currentBalance, currentLanguage) : '------'}
               </strong>
 
               <Button

@@ -1,5 +1,4 @@
 import { PlusIcon } from '@radix-ui/react-icons';
-import { useTranslation } from 'react-i18next';
 import { DropdownMenu } from '../../../../components/DropdownMenu';
 import { BankAccountIcon } from '../../../../components/icons/BankAccountIcon';
 import { CategoryIcon } from '../../../../components/icons/categories/CategoryIcon';
@@ -8,9 +7,7 @@ import useAccounts from '../Accounts/useAccounts';
 
 export function Fab() {
   const { openNewAccountModal, openNewTransactionModal } = useDashboard();
-  const { accounts, isLoading } = useAccounts();
-
-  const { t } = useTranslation();
+  const { accounts, isLoading, t } = useAccounts();
 
   const accountsIsEmpty = accounts.length === 0 || isLoading;
 

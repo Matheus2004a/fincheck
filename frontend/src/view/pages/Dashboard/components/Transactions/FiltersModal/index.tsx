@@ -1,5 +1,4 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { useTranslation } from 'react-i18next';
 import { cn } from '../../../../../../app/utils/cn';
 import { Button } from '../../../../../components/Button';
 import { Modal } from '../../../../../components/Modal';
@@ -14,10 +13,8 @@ interface FiltersModalProps {
 export function FiltersModal({ open, onClose, onApplyFilters }: FiltersModalProps) {
   const {
     selectedBankAccountId, handleSelectBankAccount,
-    selectedYear, handleChangeYear, accounts, isDisabledYear,
+    selectedYear, handleChangeYear, accounts, isDisabledYear, t,
   } = useFiltersModal();
-
-  const { t } = useTranslation();
 
   return (
     <Modal open={open} title={t('filters.transactions.mainText')} onClose={onClose}>

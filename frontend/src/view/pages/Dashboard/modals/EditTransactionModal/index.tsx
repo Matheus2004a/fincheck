@@ -1,5 +1,4 @@
 import { Controller } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { Transaction } from '../../../../../app/entities/Transaction';
 import { Button } from '../../../../components/Button';
 import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal';
@@ -21,10 +20,8 @@ export function EditTransactionModal({ transaction, open, onClose }: EditTransac
   const {
     control, errors, handleSubmit, register, accounts, categories,
     isLoading, isDeleteModalOpen, isLoadingDelete,
-    handleOpenDeleteModal, handleCloseDeleteModal, handleDeleteTransaction,
+    handleOpenDeleteModal, handleCloseDeleteModal, handleDeleteTransaction, t,
   } = useEditTransactionModal(transaction, onClose);
-
-  const { t } = useTranslation();
 
   const isIncome = transaction.type === 'INCOME';
 

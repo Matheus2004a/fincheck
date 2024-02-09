@@ -13,7 +13,7 @@ interface CardTransactionProps {
 }
 
 export function CardTransaction({ data, onClick }: CardTransactionProps) {
-  const { isVisibleValues } = useTransactions();
+  const { isVisibleValues, currentLanguage } = useTransactions();
 
   return (
     <div
@@ -28,9 +28,9 @@ export function CardTransaction({ data, onClick }: CardTransactionProps) {
         />
 
         <div>
-          <strong>{data.name}</strong>
+          <strong className="truncate">{data.name}</strong>
           <small className="text-sm text-gray-600 block">
-            {formatDate(new Date(data.date))}
+            {formatDate(new Date(data.date), currentLanguage)}
           </small>
         </div>
       </div>
@@ -43,7 +43,7 @@ export function CardTransaction({ data, onClick }: CardTransactionProps) {
       >
         {data.type === 'INCOME' ? '+' : '-'}
         {' '}
-        {isVisibleValues ? formatCurrency(data.value) : '---'}
+        {isVisibleValues ? formatCurrency(data.value, currentLanguage) : '---'}
       </span>
     </div>
   );
