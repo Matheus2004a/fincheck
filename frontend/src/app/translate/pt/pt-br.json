@@ -127,6 +127,7 @@
       "accountSuccessEdited": "Conta editada com sucesso",
       "accountSuccessDeleted": "Conta removida com sucesso"
     },
+    "countryCurrency": "R$",
     "textIncome": "receita",
     "textExpense": "despesa",
     "value": "Valor",

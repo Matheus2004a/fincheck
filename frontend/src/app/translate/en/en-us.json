@@ -124,6 +124,7 @@
       "accountSuccessEdited": "Account edited sucessfully",
       "accountSuccessDeleted": "Account removed sucessfully"
     },
+    "countryCurrency": "$",
     "textIncome": "income",
     "textExpense": "expense",
     "value": "Value",

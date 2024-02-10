@@ -45,7 +45,7 @@ export function EditAccountModal() {
         <span className="text-gray-600 text-lg">{t('modals.balanceText')}</span>
 
         <div className="flex items-center gap-2">
-          <span className="text-gray-600 text-lg">R$</span>
+          <span className="text-gray-600 text-lg">{t('countryCurrency')}</span>
 
           <Controller
             control={control}
